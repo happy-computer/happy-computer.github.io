@@ -150,6 +150,98 @@ svg.px,.px svg{shape-rendering:crispEdges}
 #folder.on{display:flex;animation:fpop .45s steps(4)}
 @keyframes fpop{0%{transform:scale(.2)}100%{transform:scale(1)}}
 
+/* ---------- FAKE IE5 ---------- */
+.x-etch{box-shadow:inset 0 1px #fff,inset 0 -1px #808080}
+.x-sunk{background:#fff;box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff,inset 2px 2px 0 #0a0a0a,inset -2px -2px 0 #dfdfdf}
+.x-menu{display:flex;height:19px;align-items:center;font-size:12px;padding:0 2px}
+.x-menu span{padding:1px 6px}
+.x-tool{display:flex;align-items:center;gap:1px;padding:2px 4px;height:46px}
+.x-tbtn{width:50px;height:42px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:none;border:0;font-size:12px;cursor:inherit;padding:0}
+.x-tbtn:hover{box-shadow:inset -1px -1px 0 #808080,inset 1px 1px 0 #fff}
+.x-tbtn:active{box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff}
+.x-tbtn.off{color:#444;text-shadow:1px 1px 0 #fff}
+.x-tbtn.off i{filter:grayscale(1);opacity:.55}
+.x-tbtn i{position:relative;display:block;width:22px;height:22px}
+.x-kb,.x-kf{border-radius:50%;background:radial-gradient(circle at 35% 30%,#b6f0b0,#2f9a2a 60%,#145e12)}
+.x-kb::before,.x-kf::before{content:"";position:absolute;top:5px;border:6px solid transparent}
+.x-kb::before{left:3px;border-right:7px solid #fff;border-left:0}
+.x-kf::before{right:3px;border-left:7px solid #fff;border-right:0}
+.x-kb::after,.x-kf::after{content:"";position:absolute;top:9px;width:7px;height:4px;background:#fff}
+.x-kb::after{left:10px}.x-kf::after{right:10px}
+.x-ks{background:#d42020;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}
+.x-ks::before,.x-ks::after{content:"";position:absolute;left:10px;top:4px;width:3px;height:14px;background:#fff;transform:rotate(45deg)}
+.x-ks::after{transform:rotate(-45deg)}
+.x-kr::before{content:"";position:absolute;inset:3px;border:3px solid #2a8f2a;border-right-color:transparent;border-radius:50%}
+.x-kr::after{content:"";position:absolute;right:1px;top:3px;border:5px solid transparent;border-top:6px solid #2a8f2a;border-bottom:0}
+.x-kh::before{content:"";position:absolute;left:1px;top:1px;border:10px solid transparent;border-bottom:9px solid #b22;border-top:0}
+.x-kh::after{content:"";position:absolute;left:5px;top:10px;width:12px;height:10px;background:linear-gradient(90deg,#f2d27a 0 4px,#6b3d14 4px 8px,#f2d27a 8px);border:1px solid #6b4a14}
+.x-kq::before{content:"";position:absolute;left:1px;top:1px;width:11px;height:11px;border:3px solid #304060;border-radius:50%;background:#bfe3ff}
+.x-kq::after{content:"";position:absolute;left:13px;top:12px;width:4px;height:10px;background:#304060;transform:rotate(-45deg)}
+.x-tsep{width:2px;height:36px;box-shadow:inset 1px 0 #808080,inset -1px 0 #fff;margin:0 3px}
+.x-throb{margin-left:auto;width:40px;height:38px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff}
+.x-throb svg{width:26px;height:26px}
+#ie.x-load .x-throb svg{animation:x-spin 1s linear infinite}
+@keyframes x-spin{to{transform:rotateY(360deg)}}
+.x-addr{display:flex;align-items:center;gap:4px;padding:2px 4px;height:26px;font-size:12px}
+.x-url{flex:1;min-width:0;height:21px;display:flex;align-items:center;gap:4px;padding:0 0 0 4px;white-space:nowrap;overflow:hidden}
+.x-url svg{width:14px;height:14px;flex:none}
+.x-url span{flex:1;overflow:hidden;text-overflow:ellipsis}
+.x-dd{width:16px;height:17px;margin-right:2px;flex:none;background:#c0c0c0;position:relative}
+.x-dd::after{content:"";position:absolute;left:4px;top:7px;border:4px solid transparent;border-top:4px solid #000;border-bottom:0}
+.x-go{display:flex;align-items:center;gap:3px;padding:0 4px}
+.x-go::before{content:"";border:5px solid transparent;border-left:7px solid #1a8a1a;border-right:0}
+.x-page{height:194px;margin:0 2px;overflow:hidden;position:relative;font-family:Arial,Helvetica,sans-serif;text-align:center;color:#000}
+#ie.x-blank .x-page>*{visibility:hidden}
+.x-pin{position:absolute;inset:2px;overflow:hidden;background:#fff}
+.x-site{display:flex;align-items:baseline;gap:8px;padding:5px 10px;background:#001a66 linear-gradient(90deg,#001a66,#0a4fc0);color:#fff;text-align:left}
+.x-site b{font:italic 900 16px "Arial Black",Arial,sans-serif}.x-site b em{color:#ffd23f;font-style:inherit}
+.x-site span{font-size:12px;opacity:.85}
+.x-risk{margin:7px 10px 6px;padding:5px;background:#d00;color:#fff;font:900 22px/1.1 Impact,"Arial Black",sans-serif;letter-spacing:.06em;animation:x-rb .7s steps(1) infinite}
+@keyframes x-rb{50%{background:#ff0;color:#d00}}
+.x-scan{font-size:12px;margin:0 16px;text-align:left}
+.x-scan p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.x-scan .x-thr{color:#c00;font-weight:bold}
+.x-sbar{height:12px;margin:3px 0;border:1px solid #888;background:#eee}
+.x-sbar div{height:100%;width:0;background:repeating-linear-gradient(90deg,#d00 0 8px,#f55 8px 10px)}
+.x-get{position:relative;margin-top:7px;padding:8px 26px;font:bold 18px Arial,sans-serif;color:#fff;cursor:pointer;border:2px outset #4c4;background:#157a15 linear-gradient(#2fa52f,#126a12);text-shadow:1px 1px 0 #060}
+.x-get::before{content:"";position:absolute;inset:-14px -10px}
+.x-get:active{border-style:inset}
+.x-stat{display:flex;gap:2px;margin-top:2px;height:20px;font-size:12px}
+.x-stat>span{display:flex;align-items:center;gap:4px;padding:0 5px;box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff;white-space:nowrap;overflow:hidden}
+.x-stat svg{width:14px;height:14px;flex:none}
+.x-st1{flex:1;min-width:0}
+.x-st2{width:96px}.x-st2 div{height:10px;width:0;background:repeating-linear-gradient(90deg,#000080 0 6px,transparent 6px 8px)}
+#ie:not(.x-load) .x-st2 div{visibility:hidden}
+.x-st3{width:104px}
+
+/* ---------- CCTV ---------- */
+#sF.on{display:grid;grid-template:1fr 1fr/1fr 1fr;gap:6px;padding:6px;background:#000;font-family:"Courier New",monospace}
+.x-cam{position:relative;overflow:hidden;background:#010;animation:x-cf 3.1s steps(1) infinite}
+.x-cam:nth-child(2){animation-delay:-1.2s}.x-cam:nth-child(4){animation-delay:-2.3s}
+@keyframes x-cf{0%,100%{opacity:1}31%{opacity:.82}33%{opacity:1}71%{opacity:.9}}
+.x-cam img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) sepia(1) hue-rotate(65deg) saturate(2.6) contrast(1.25) brightness(.85);
+  transform:scale(var(--s));transform-origin:var(--o);transition:transform 1.4s cubic-bezier(.6,0,.9,.4),transform-origin 1.4s ease-in}
+.x-cam::before,.x-cam::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2}
+.x-cam::before{background:repeating-linear-gradient(0deg,rgba(0,0,0,.45) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.7))}
+.x-cam::after{opacity:.22;mix-blend-mode:screen;animation:x-nz .3s steps(3) infinite;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.6 -.3'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+@keyframes x-nz{0%{background-position:0 0}33%{background-position:-60px 40px}66%{background-position:50px -70px}}
+.x-lbl,.x-ts{position:absolute;z-index:3;color:#d8ffd8;font-size:14px;font-weight:bold;text-shadow:0 0 4px #000,1px 1px 0 #000}
+.x-lbl{left:10px;top:8px;display:flex;align-items:center;gap:6px}
+.x-ts{right:10px;bottom:8px;font-size:12px}
+.x-rec{width:10px;height:10px;border-radius:50%;background:#f11;box-shadow:0 0 6px #f00;animation:blink 1s steps(1) infinite}
+.x-sil{position:absolute;left:30%;bottom:0;width:40%;height:88%;z-index:3;opacity:0;filter:blur(1.5px)}
+#sF.x-cut .x-c3 img{opacity:0}
+#sF.x-cut .x-c3{background:#111}
+#sF.x-cut .x-c3::after{opacity:.95;mix-blend-mode:normal;animation-duration:.12s}
+#sF.x-who .x-c3 .x-sil{opacity:.92}
+.x-alert{position:absolute;left:50%;top:50%;z-index:5;transform:translate(-50%,-50%);display:none;padding:10px 18px;background:rgba(0,0,0,.75);border:2px solid #f11;
+  color:#ff2a2a;font:bold 30px/1.1 "Courier New",monospace;letter-spacing:.06em;white-space:nowrap;text-shadow:0 0 10px #f00;animation:blink .45s steps(1) infinite}
+#sF.x-alarm .x-alert{display:block}
+#sF.x-alarm .x-c3{box-shadow:inset 0 0 0 3px #f11}
+#sF.x-zoom .x-cam img{transform:scale(9);transform-origin:49% 39%}
+#sF.x-zoom .x-c3 img{opacity:1}
+
 /* ---------- SCARE ---------- */
 #scare{position:absolute;inset:0;z-index:40;display:none;background:#000;font-family:"Fixedsys","Terminal","Lucida Console","Courier New",monospace;overflow:hidden;cursor:none;touch-action:none}
 #scare.on{display:block}
@@ -171,19 +263,31 @@ svg.px,.px svg{shape-rendering:crispEdges}
 #sub{position:absolute;inset:0;z-index:10;display:none;background:#fff;color:#000;align-items:center;justify-content:center;font:900 150px/1 Impact,"Arial Black",sans-serif;letter-spacing:.04em;text-shadow:none}
 #sub.on{display:flex}
 
-#sA{flex-direction:column;align-items:flex-start;padding:40px 54px;color:#b6f0b6;font-size:17px;line-height:1.55;
-  text-shadow:-1px 0 rgba(255,46,46,.4),1px 0 rgba(44,164,255,.4),0 0 8px rgba(80,255,120,.55);white-space:pre-wrap}
-#sA .w{color:#e6e6e6}
+#sA{background:#008080;font:12px/1.4 "MS Sans Serif",Tahoma,Geneva,sans-serif;color:#000;cursor:default}
+#sA.on{display:block}
+.x-w98 .tb svg{width:8px;height:7px}
+.x-ib{padding:14px 14px 12px}
+.x-ib p{margin-bottom:8px}
+.x-files{height:66px;overflow:hidden;background:#fff;padding:3px 6px;margin-bottom:10px;font-size:12px;line-height:15px;white-space:nowrap;
+  box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff,inset 2px 2px 0 #0a0a0a,inset -2px -2px 0 #dfdfdf}
+.x-eb{display:flex;gap:12px;align-items:flex-start;padding:14px 12px 2px}
+.x-eb svg{width:32px;height:32px;flex:none}
+.x-eb p{word-break:break-all;line-height:1.45}
+.x-w98 .row{justify-content:center}
 .cursor{display:inline-block;width:.6em;height:1em;background:currentColor;vertical-align:-2px;animation:blink .6s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 
-#sB{flex-direction:column;align-items:center;justify-content:center;gap:22px;background:radial-gradient(ellipse at center,#120606 0%,#000 70%)}
-#eye{width:520px;height:auto;filter:drop-shadow(0 0 14px rgba(255,80,80,.25));animation:eflick 1.7s infinite}
+#sB{flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:34px;background:#000}
+#sB.x-ghost{display:flex;opacity:.13;z-index:6;pointer-events:none}
+#eye{position:absolute;inset:0;overflow:hidden;animation:eflick 1.7s infinite}
+#eye::after{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.85) 100%)}
+#eyeImg{position:absolute;left:-10%;top:-10%;width:120%;height:120%;object-fit:cover;filter:contrast(1.15) saturate(.85);will-change:transform}
 @keyframes eflick{0%,100%{opacity:1}7%{opacity:.55}9%{opacity:1}52%{opacity:.9}54%{opacity:.35}56%{opacity:1}}
-#lidT,#lidB{transition:transform .09s ease-in}
-#eye.shut #lidT{transform:translateY(78px)}
-#eye.shut #lidB{transform:translateY(-74px)}
-.cap{color:#eaeaea;font-weight:bold;font-size:40px;letter-spacing:.2em;text-align:center}
+#lidT,#lidB{position:absolute;left:0;right:0;height:51%;background:#000;z-index:2;transition:transform .09s ease-in}
+#lidT{top:0;transform:translateY(-100%)}
+#lidB{bottom:0;transform:translateY(100%)}
+#eye.shut #lidT,#eye.shut #lidB{transform:none}
+.cap{position:relative;z-index:3;color:#eaeaea;font-weight:bold;font-size:40px;letter-spacing:.2em;text-align:center;text-shadow:0 0 12px #000}
 
 #sC{flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(ellipse at center,#9a1010 0%,#560000 65%,#1e0000 100%);color:#ffd6d6}
 #lock{font-size:11.5px;line-height:1.02;color:#ffe3e3;text-shadow:-2px 0 rgba(0,255,255,.45),2px 0 rgba(255,0,80,.55),0 0 6px rgba(255,120,120,.6);animation:jit .18s steps(2) infinite}
@@ -195,11 +299,27 @@ svg.px,.px svg{shape-rendering:crispEdges}
 @keyframes g1{0%{clip-path:inset(0 0 70% 0);transform:translate(-6px,0)}50%{clip-path:inset(30% 0 40% 0);transform:translate(5px,0)}100%{clip-path:inset(10% 0 60% 0);transform:translate(-3px,0)}}
 @keyframes g2{0%{clip-path:inset(60% 0 0 0);transform:translate(6px,0)}50%{clip-path:inset(40% 0 20% 0);transform:translate(-5px,0)}100%{clip-path:inset(75% 0 5% 0);transform:translate(3px,0)}}
 
-#sD{background:#0000aa;color:#fff;align-items:center;justify-content:center;font-size:18px;line-height:24px;text-shadow:0 0 4px rgba(255,255,255,.35)}
-.bsod{width:820px;white-space:pre-wrap}
-.bsod .hd{display:block;width:max-content;margin:0 auto 26px;background:#aaa;color:#0000aa;padding:0 8px;text-shadow:none}
-.bsod .ct{display:block;text-align:center;margin-top:26px}
-#sD.hard{animation:shake .2s linear infinite}
+#sD{background:#000;color:#3f6;flex-direction:column;align-items:center;justify-content:center;font-size:17px;line-height:1.6;cursor:default;
+  text-shadow:-1px 0 rgba(255,0,60,.5),1px 0 rgba(0,200,255,.4),0 0 8px rgba(60,255,120,.6)}
+#sD::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,255,80,.07) 0 1px,transparent 1px 3px);pointer-events:none}
+.x-term{position:relative;width:640px;max-width:90%}
+.x-th{position:relative;font-size:34px;font-weight:bold;letter-spacing:.18em;margin-bottom:12px;animation:jit .16s steps(2) infinite}
+.x-th::before,.x-th::after{content:attr(data-t);position:absolute;inset:0}
+.x-th::before{color:#f0f;mix-blend-mode:screen;animation:g1 .5s steps(3) infinite}
+.x-th::after{color:#0ff;mix-blend-mode:screen;animation:g2 .4s steps(3) infinite}
+.x-sys{color:#1d9a3e;font-size:14px;margin-bottom:16px}
+.x-st{display:none}
+.x-in{display:flex;align-items:center;gap:8px;margin-top:6px;border-bottom:1px solid #1d9a3e}
+.x-in input{flex:1;min-width:0;height:44px;background:transparent;border:0;outline:0;color:#5f8;font:inherit;font-size:22px;letter-spacing:.1em;caret-color:#5f8;text-shadow:inherit}
+.x-note{position:absolute;top:14px;left:50%;width:360px;max-width:88%;z-index:3;transform:translate(-50%,-170%);transition:transform .5s cubic-bezier(.2,.9,.3,1.15);
+  background:rgba(38,38,42,.94);color:#f2f2f2;border-radius:16px;padding:10px 14px;font:13px/1.35 -apple-system,"Segoe UI",Roboto,sans-serif;text-shadow:none;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+.x-note.on{transform:translate(-50%,0)}
+.x-note b::before{content:"";display:inline-block;width:16px;height:16px;border-radius:4px;background:#000;border:1px solid #3f6;vertical-align:-4px;margin-right:7px}
+.x-now{float:right;color:#aaa;font-size:12px}
+.x-note p{margin-top:3px}
+#sE{background:#000;align-items:flex-start;padding:44px 54px}
+#inst{font-size:18px;line-height:1.5;white-space:pre-wrap;color:#cfcfcf;text-shadow:0 0 6px rgba(255,255,255,.25)}
+#sE.hard{animation:shake .2s linear infinite}
 
 #x{display:none}
 #screen.scaring #x{position:absolute;right:0;bottom:0;width:56px;height:56px;z-index:60;opacity:.04;color:#fff;font-size:12px;display:flex;align-items:flex-end;justify-content:flex-end;
@@ -370,12 +490,48 @@ svg.px,.px svg{shape-rendering:crispEdges}
           <div class="row"><button class="b98 bev def" id="msgOk" type="button">OK</button></div>
         </section>
 
+        <section class="win" id="ie" style="left:150px;top:20px;width:540px" role="dialog" aria-label="Antivirus 550 - Microsoft Internet Explorer">
+          <div class="tbar"><svg aria-hidden="true"><use href="#ic-ie"/></svg><span class="t">Antivirus 550 - Microsoft Internet Explorer</span>
+            <span class="tb bev" aria-hidden="true"><svg><use href="#g-min"/></svg></span><span class="tb bev" aria-hidden="true"><svg style="width:9px;height:9px"><use href="#g-max"/></svg></span><button class="tb bev x" id="ieX" type="button" aria-label="Close"><svg aria-hidden="true"><use href="#g-x"/></svg></button>
+          </div>
+          <div class="x-menu x-etch"><span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Tools</span><span>Help</span></div>
+          <div class="x-tool x-etch">
+            <button class="x-tbtn off" type="button"><i class="x-kb"></i>Back</button>
+            <button class="x-tbtn off" type="button"><i class="x-kf"></i>Forward</button>
+            <button class="x-tbtn" id="ieStop" type="button"><i class="x-ks"></i>Stop</button>
+            <button class="x-tbtn" id="ieRef" type="button"><i class="x-kr"></i>Refresh</button>
+            <button class="x-tbtn" id="ieHome" type="button"><i class="x-kh"></i>Home</button>
+            <span class="x-tsep"></span>
+            <button class="x-tbtn" type="button"><i class="x-kq"></i>Search</button>
+            <span class="x-throb"><svg aria-hidden="true"><use href="#ic-ie"/></svg></span>
+          </div>
+          <div class="x-addr x-etch"><span>Address</span>
+            <span class="x-url x-sunk"><svg aria-hidden="true"><use href="#ic-ie"/></svg><span>http://www.antivirus550.com/free-scan</span><i class="x-dd bev"></i></span>
+            <span class="x-go">Go</span><span>Links »</span>
+          </div>
+          <div class="x-page x-sunk"><div class="x-pin">
+            <div class="x-site"><b>ANTIVIRUS <em>550</em></b><span>Free Online Scanner</span></div>
+            <div class="x-risk">⚠ YOUR PC IS AT RISK ⚠</div>
+            <div class="x-scan">
+              <p>Scanning: <span id="ieFile">C:\WINDOWS\SYSTEM</span></p>
+              <div class="x-sbar"><div id="ieScan"></div></div>
+              <p class="x-thr">Threats found: <span id="ieThr">13</span></p>
+            </div>
+            <button class="x-get" id="ieGet" type="button">Download Free Scan</button>
+          </div></div>
+          <div class="x-stat">
+            <span class="x-st1"><svg aria-hidden="true"><use href="#ic-ie"/></svg><span id="ieSt">Done</span></span>
+            <span class="x-st2"><div id="ieBar"></div></span>
+            <span class="x-st3"><svg aria-hidden="true"><use href="#ic-net"/></svg>Internet</span>
+          </div>
+        </section>
+
         <div id="tip" role="status"><b>New folder on your desktop</b>A folder named "i see you" was created.</div>
 
         <div id="bar">
           <button id="start" class="bev" type="button"><svg aria-hidden="true"><use href="#flag"/></svg>Start</button>
           <span class="sep"></span>
-          <div id="tasks"><span class="task bev down" id="task"><svg aria-hidden="true"><use href="#ic-shield"/></svg>Antivirus 550 Setup</span></div>
+          <div id="tasks"><span class="task bev down" id="task"><svg aria-hidden="true"><use href="#ic-shield"/></svg>Antivirus 550 Setup</span><span class="task bev" id="ieTask"><svg aria-hidden="true"><use href="#ic-ie"/></svg>Antivirus 550 - Microsoft Internet Explorer</span></div>
           <div id="tray">
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 5.5h3l4-3.5v12l-4-3.5h-3z" fill="#ffff60" stroke="#000"/><path d="M10.5 5.5c1 1 1 4 0 5M12.5 3.5c2 2 2 7 0 9" fill="none" stroke="#000"/></svg>
             <span id="clock">12:00 PM</span>
@@ -386,46 +542,7 @@ svg.px,.px svg{shape-rendering:crispEdges}
       <div id="scare" aria-hidden="true">
         <div class="scr" id="sA"></div>
         <div class="scr" id="sB">
-          <svg id="eye" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="scl" cx="50%" cy="46%" r="58%"><stop offset="0" stop-color="#f3ede4"/><stop offset=".55" stop-color="#ddd0c4"/><stop offset=".82" stop-color="#b08a7e"/><stop offset="1" stop-color="#4a2420"/></radialGradient>
-              <radialGradient id="iris" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#140904"/><stop offset=".36" stop-color="#4a2c10"/><stop offset=".5" stop-color="#7a6430"/><stop offset=".72" stop-color="#4f6c54"/><stop offset=".9" stop-color="#26362c"/><stop offset="1" stop-color="#060908"/></radialGradient>
-              <linearGradient id="lsh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".75"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
-              <linearGradient id="skinT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0404"/><stop offset=".8" stop-color="#3a1c18"/><stop offset="1" stop-color="#55281f"/></linearGradient>
-              <linearGradient id="skinB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a221c"/><stop offset=".3" stop-color="#2a1210"/><stop offset="1" stop-color="#080202"/></linearGradient>
-              <clipPath id="al"><path d="M10 110 Q200 -40 390 110 Q200 260 10 110 Z"/></clipPath>
-              <filter id="soft"><feGaussianBlur stdDeviation=".6"/></filter>
-            </defs>
-            <g clip-path="url(#al)">
-              <rect width="400" height="220" fill="url(#scl)"/>
-              <g fill="none" stroke="#a3121a" stroke-linecap="round" opacity=".6" filter="url(#soft)">
-                <path stroke-width="1.6" d="M14 110 C50 100 70 118 110 108 C125 104 135 112 142 106"/>
-                <path stroke-width="1.3" d="M30 90 C60 86 80 96 105 92 C118 90 128 96 140 92"/>
-                <path stroke-width="1.4" d="M28 132 C60 130 85 140 112 128 C122 124 132 130 140 124"/>
-                <path stroke-width="1" d="M60 76 C80 86 100 80 122 90"/>
-                <path stroke-width="1.6" d="M386 110 C350 104 330 118 290 108 C275 104 265 112 258 106"/>
-                <path stroke-width="1.3" d="M370 88 C340 86 320 96 295 92 C282 90 272 96 260 92"/>
-                <path stroke-width="1.4" d="M372 132 C340 132 315 140 288 128 C278 124 268 130 260 124"/>
-                <path stroke-width="1" d="M340 74 C320 86 300 80 278 90"/>
-                <path stroke-width=".7" d="M70 104 C76 96 84 96 90 88M80 134 C88 140 96 138 104 148M48 120 C56 126 60 124 66 132M330 104 C324 96 316 96 310 88M320 134 C312 140 304 138 296 148M352 120 C344 126 340 124 334 132"/>
-              </g>
-              <g id="irisG">
-                <circle cx="200" cy="110" r="66" fill="url(#iris)"/>
-                <g id="fibers" opacity=".55"></g>
-                <circle cx="200" cy="110" r="64" fill="none" stroke="#050505" stroke-width="5" opacity=".85"/>
-                <circle cx="200" cy="110" r="34" fill="none" stroke="#a07a30" stroke-width="2" opacity=".35"/>
-                <circle id="pupil" cx="200" cy="110" r="26" fill="#000"/>
-                <ellipse cx="224" cy="86" rx="11" ry="8" fill="#fff" opacity=".85"/>
-                <circle cx="182" cy="130" r="4" fill="#fff" opacity=".35"/>
-              </g>
-              <rect x="0" y="20" width="400" height="80" fill="url(#lsh)"/>
-              <g id="lidT"><path d="M-10 -200H410V110Q200 -40 -10 110Z" fill="url(#skinT)"/><path d="M-10 110Q200 -40 410 110" fill="none" stroke="#000" stroke-width="5"/></g>
-              <g id="lidB"><path d="M-10 110Q200 260 410 110V420H-10Z" fill="url(#skinB)"/><path d="M-10 110Q200 260 410 110" fill="none" stroke="#1a0606" stroke-width="3"/></g>
-            </g>
-            <path d="M10 110 Q200 -40 390 110 Q200 260 10 110 Z" fill="none" stroke="#3a1a16" stroke-width="4"/>
-            <path d="M36 74 Q200 -36 364 74" fill="none" stroke="#3a1a16" stroke-width="3" opacity=".7"/>
-            <path d="M60 162 Q200 232 340 162" fill="none" stroke="#3a1a16" stroke-width="2" opacity=".45"/>
-          </svg>
+          <div id="eye"><img id="eyeImg" src="eye.jpg" alt="" /><div id="lidT"></div><div id="lidB"></div></div>
           <div class="cap">YOU HAVE BEEN NOTICED</div>
         </div>
         <div class="scr" id="sC">
@@ -459,13 +576,27 @@ svg.px,.px svg{shape-rendering:crispEdges}
           <div class="big" data-t="I SEE YOU">I SEE YOU</div>
         </div>
         <div class="scr" id="sD">
-          <div class="bsod"><span class="hd">Windows</span>A fatal exception 0E has occurred at 0028:C0011E36 in VXD UXCRYPT(01) +
-00010E36. The current application will be terminated.
-
-*  Press any key to terminate the current application.
-*  Press CTRL+ALT+DEL again to restart your computer. You will
-   lose any unsaved information in all applications.
-<span class="ct">Press any key to continue <span class="cursor" style="height:4px;vertical-align:-1px"></span></span></div>
+          <div class="x-term">
+            <div class="x-th" data-t="PHONE VERIFICATION">PHONE VERIFICATION</div>
+            <p class="x-sys">&gt; session module loaded<br />&gt; device: unknown // owner: YOU</p>
+            <div class="x-st" id="tS1"><label for="tPhone">&gt; Enter your phone number to continue</label>
+              <div class="x-in">$<input id="tPhone" type="tel" autocomplete="off" spellcheck="false" /></div></div>
+            <div class="x-st" id="tS2"><p>&gt; Sending code... <span id="tSpin">|</span></p></div>
+            <div class="x-st" id="tS3"><label for="tCode">&gt; Enter the code</label>
+              <div class="x-in">$<input id="tCode" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" /></div>
+              <p class="x-sys" id="tT" style="margin-top:10px">auto-continue in 10</p></div>
+          </div>
+          <div class="x-note" id="tNote"><span class="x-now">now</span><b>hacking bot</b><p>Your session code: 666-091. Do not close this window.</p></div>
+        </div>
+        <div class="scr" id="sE"><pre id="inst"></pre></div>
+        <div class="scr" id="sF">
+          <div class="x-cam" style="--s:1.08;--o:50% 50%"><img src="cam.jpg" alt="" /><span class="x-lbl"><b class="x-rec"></b>CAM 01</span><span class="x-ts"></span></div>
+          <div class="x-cam" style="--s:1.9;--o:14% 45%"><img src="cam.jpg" alt="" /><span class="x-lbl"><b class="x-rec"></b>CAM 02</span><span class="x-ts"></span></div>
+          <div class="x-cam x-c3" style="--s:1.7;--o:78% 62%"><img src="cam.jpg" alt="" />
+            <svg class="x-sil" viewBox="0 0 100 120" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><ellipse cx="50" cy="30" rx="15" ry="19" fill="#020402"/><path d="M42 46h16l3 14c16 3 29 14 31 34l2 26H6l2-26c2-20 15-31 31-34z" fill="#020402"/><circle cx="44" cy="29" r="1.6" fill="#cfe"/><circle cx="56" cy="29" r="1.6" fill="#cfe"/></svg>
+            <span class="x-lbl"><b class="x-rec"></b>CAM 03</span><span class="x-ts"></span></div>
+          <div class="x-cam" style="--s:2.1;--o:50% 60%"><img src="cam.jpg" alt="" /><span class="x-lbl"><b class="x-rec"></b>CAM 04</span><span class="x-ts"></span></div>
+          <div class="x-alert">CAM 03: MOTION DETECTED</div>
         </div>
         <div id="gl"></div>
         <canvas id="static" width="240" height="135"></canvas>
@@ -497,6 +628,7 @@ svg.px,.px svg{shape-rendering:crispEdges}
   window.xScale=1; window.xW=960; window.xH=540;
   var spots={setup:[510,345],prog:[380,210],msg:[300,140]};
   function place(){
+    var ie=$("ie"); ie.style.left=(compact?24:140)+"px"; ie.style.top=(compact?6:24)+"px";
     for(var id in spots){
       var w=$(id), s=spots[id];
       w.style.left=Math.round(id==="setup"&&compact ? window.xW-s[0]-16 : (window.xW-s[0])/2+(id==="setup"?-5:0))+"px";
@@ -571,6 +703,7 @@ svg.px,.px svg{shape-rendering:crispEdges}
     if(i.id==="folder") return;
     window.xOnOpen(i, function(){
       var n=i.querySelector(".nm").textContent;
+      if(n==="Internet Explorer"){ window.xIE(); return; }
       $("msgT").textContent=n; $("msgM").textContent=notes[n]||notes["My Computer"];
       msg.classList.add("on"); window.xFront(msg); $("msgOk").focus();
     });
@@ -601,6 +734,37 @@ svg.px,.px svg{shape-rendering:crispEdges}
     function end(){ drag=null; }
     bar.addEventListener("pointerup", end); bar.addEventListener("pointercancel", end);
   });
+
+  /* ---------- FAKE INTERNET EXPLORER ---------- */
+  var ie=$("ie"), ieSt=$("ieSt"), ieBar=$("ieBar"), ieTask=$("ieTask"), ieGen=0;
+  function ieDone(){ ieGen++; ie.classList.remove("x-load","x-blank"); ieSt.textContent="Done"; }
+  window.xIE=function(){
+    ie.classList.add("on","x-load","x-blank"); ieTask.style.display=""; front(ie);
+    var g=++ieGen, t0=performance.now();
+    (function f(now){
+      if(g!==ieGen) return;
+      var p=Math.min(1,(now-t0)/2800);
+      ieBar.style.width=Math.floor(p*12)/12*100+"%";
+      if(p>.4) ie.classList.remove("x-blank");
+      ieSt.textContent=p<.25?"Finding site: www.antivirus550.com":p<.4?"Website found. Waiting for reply...":"Opening page http://www.antivirus550.com/free-scan...";
+      if(p<1) requestAnimationFrame(f); else ieDone();
+    })(t0);
+  };
+  $("ieX").addEventListener("click", function(){ ieGen++; ie.classList.remove("on"); ieTask.style.display="none"; });
+  $("ieStop").addEventListener("click", ieDone);
+  $("ieRef").addEventListener("click", window.xIE); $("ieHome").addEventListener("click", window.xIE);
+  $("ieGet").addEventListener("click", function(){
+    var w=["prog","setup"].map($).filter(function(x){ return x.classList.contains("on"); })[0];
+    if(w){ front(w); w.classList.remove("wiggle"); void w.offsetWidth; w.classList.add("wiggle"); }
+  });
+  var ieF=["C:\\WINDOWS\\SYSTEM\\KERNEL32.DLL","C:\\WINDOWS\\WIN.INI","C:\\MY DOCUMENTS\\","C:\\WINDOWS\\SYSTEM\\USER.EXE","C:\\WINDOWS\\TEMP\\~eye.tmp","C:\\PROGRA~1\\WEBCAM\\cap.dll","C:\\WINDOWS\\SYSTEM\\SHELL32.DLL"], ieP=0, ieN=13;
+  setInterval(function(){
+    if(!ie.classList.contains("on")) return;
+    ieP=(ieP+3)%103; $("ieScan").style.width=Math.min(100,ieP)+"%";
+    $("ieFile").textContent=ieF[Math.random()*ieF.length|0];
+    if(Math.random()<.08){ ieN++; $("ieThr").textContent=ieN; }
+  }, 160);
+  window.xIE();
 })();
 </script>
 <script>
@@ -747,7 +911,7 @@ svg.px,.px svg{shape-rendering:crispEdges}
       gl.appendChild(s); slices.push(s);
     }
   }
-  var base={A:0,B:.22,C:.55,D:.3};
+  var base={A:0,B:.22,C:.55,D:.3,E:.12};
   function glitchTick(){
     var lvl=Math.max(base[cur]||0, hard);
     slices.forEach(function(s){
@@ -770,11 +934,11 @@ svg.px,.px svg{shape-rendering:crispEdges}
   }
 
   /* ---------- SCREENS ---------- */
-  var screens={A:$("sA"),B:$("sB"),C:$("sC"),D:$("sD")};
+  var screens={A:$("sA"),B:$("sB"),C:$("sC"),D:$("sD"),E:$("sE"),F:$("sF")};
   function show(k){
-    cur=k;
+    cur=k; screens.B.classList.remove("x-ghost");
     for(var s in screens) screens[s].classList.toggle("on", s===k);
-    if(k && k!=="A") buildSlices(screens[k]); else { gl.innerHTML=""; slices=[]; }
+    if(k && k!=="A" && k!=="F") buildSlices(screens[k]); else { gl.innerHTML=""; slices=[]; }
   }
   function shake(){ scare.classList.remove("shake"); void scare.offsetWidth; scare.classList.add("shake"); }
   function invertFlash(){ scare.classList.add("invert"); later(function(){ scare.classList.remove("invert"); }, 60); }
@@ -787,38 +951,56 @@ svg.px,.px svg{shape-rendering:crispEdges}
     later(chaos, 300+Math.random()*900);
   }
 
-  var lines=["Starting Windows 98 . . . .","error: 0x03527737","error: 0x0266712","error: 0x02897593","error: 0x01447812","error: 0x0150974",
-    "error: 0x03873700","error: 0x0700882","error: 0x03803618","Memory section at address 0x0424* is locked!","Service UXCryptor started."];
-  function typeOut(done){
-    var el=screens.A; el.innerHTML=""; var li=0;
-    function nextLine(){
-      if(li>=lines.length){ later(done, 900); return; }
-      var row=document.createElement("div"); if(li===0||li>=9) row.className="w";
-      var txt=document.createTextNode(""), c=document.createElement("span"); c.className="cursor";
-      row.appendChild(txt); row.appendChild(c); el.appendChild(row);
-      var s=lines[li], ci=0;
-      (function ch(){
-        txt.data=s.slice(0,++ci);
-        if(ci<s.length) later(ch, li===0?55:22+Math.random()*25);
-        else { row.removeChild(c); li++; if(Math.random()<.4) blip(); later(nextLine, li===1?700:160); }
-      })();
-    }
-    nextLine();
+  /* ---------- FAKE WIN98 INSTALL + ERROR CASCADE ---------- */
+  function beep(){
+    if(!audio) return;
+    try{
+      var c=audio.ctx, o=c.createOscillator(), g=c.createGain(), t=c.currentTime;
+      o.type="square"; o.frequency.setValueAtTime(620,t); o.frequency.setValueAtTime(470,t+.07);
+      g.gain.setValueAtTime(.18,t); g.gain.exponentialRampToValueAtTime(.001,t+.16);
+      o.connect(g); g.connect(audio.master); o.start(t); o.stop(t+.17);
+    }catch(e){}
+  }
+  function w98(title, body, x, y, w){
+    var d=document.createElement("section"); d.className="win on x-w98";
+    d.style.cssText="left:"+x+"px;top:"+y+"px;width:"+w+"px";
+    d.innerHTML='<div class="tbar"><span class="t">'+title+'</span><span class="tb bev x" aria-hidden="true"><svg><use href="#g-x"/></svg></span></div>'+body;
+    screens.A.appendChild(d); return d;
+  }
+  var f98=files.concat(["C:\\WINDOWS\\EXPLORER.EXE","C:\\WINDOWS\\SYSTEM\\USER.EXE","C:\\WINDOWS\\SYSTEM\\GDI.EXE","C:\\WINDOWS\\SYSTEM\\KRNL386.EXE","C:\\WINDOWS\\SYSTEM\\SHELL32.DLL","C:\\WINDOWS\\SYSTEM\\COMCTL32.DLL"]);
+  function install(done){
+    var el=screens.A; el.innerHTML="";
+    var d=w98("Windows 98 Setup",'<div class="x-ib"><p>installing windows 98...</p><div class="x-files"></div><div class="track"><div class="blocks"></div></div><p style="margin:6px 0 0">0% complete</p></div>',
+      Math.max(10,(el.clientWidth-380)/2), Math.max(10,(el.clientHeight-230)/2), 380);
+    var F=d.querySelector(".x-files"), B=d.querySelector(".blocks"), P=d.querySelectorAll("p")[1], t0=performance.now(), last=0, li=0;
+    (function step(now){
+      if(!running||cur!=="A") return;
+      var p=(now-t0)/6000, v=p<.7?Math.floor(p/.7*96):96+(Math.random()<.4?1:0);
+      B.style.width=v+"%"; P.textContent=v+"% complete";
+      if(now-last>(p<.7?110:600)){ last=now; var r=document.createElement("div"); r.textContent="Copying "+f98[li++%f98.length]; F.appendChild(r); if(F.children.length>4) F.removeChild(F.firstChild); }
+      if(p<1) requestAnimationFrame(step); else done();
+    })(t0);
+  }
+  var ERR="error:{you-dont_click-exit}-arctic-error[windows_support-off]-session-hacking-created-successfully";
+  function errors(done){
+    var el=screens.A, W=el.clientWidth, H=el.clientHeight, t0=performance.now(), n=0, x=W/2-160, y=H/2-90;
+    (function add(){
+      if(cur!=="A") return;
+      var t=performance.now()-t0;
+      if(t>5000){ done(); return; }
+      var d=w98("Error",'<div class="x-eb"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#e00" stroke="#600"/><path d="M10 10l12 12M22 10L10 22" stroke="#fff" stroke-width="3.5"/></svg><p></p></div><div class="row"><button class="b98 bev def" type="button" tabindex="-1">OK</button></div>', x, y, 320);
+      d.querySelector("p").textContent=ERR; d.style.zIndex=10+(++n);
+      x+=18; y+=16;
+      if(y>H-160||x>W-330){ x=Math.random()*(W-330); y=Math.random()*(H-200); }
+      if(n%3===0) shake();
+      if(n%2||t<1500) beep();
+      if(el.children.length>70) el.removeChild(el.firstChild);
+      later(add, Math.max(45, 300-t/14));
+    })();
   }
 
   /* ---------- EYE ---------- */
-  (function fibers(){
-    var g=$("fibers"), ns="http://www.w3.org/2000/svg", pal=["#d6b060","#8fb07a","#3a2410","#e8d090","#2b4a38","#b07a30"];
-    for(var i=0;i<140;i++){
-      var a=Math.random()*Math.PI*2, r1=27+Math.random()*6, r2=44+Math.random()*19, l=document.createElementNS(ns,"line");
-      var wob=(Math.random()-.5)*.08;
-      l.setAttribute("x1",200+Math.cos(a)*r1); l.setAttribute("y1",110+Math.sin(a)*r1);
-      l.setAttribute("x2",200+Math.cos(a+wob)*r2); l.setAttribute("y2",110+Math.sin(a+wob)*r2);
-      l.setAttribute("stroke",pal[Math.random()*pal.length|0]); l.setAttribute("stroke-width",(.5+Math.random()).toFixed(2));
-      l.setAttribute("stroke-linecap","round"); g.appendChild(l);
-    }
-  })();
-  var eye=$("eye"), irisG=$("irisG"), pupil=$("pupil"), mx=-1, my=-1, ex=0, ey=0, lastMove=0, sx=0, sy=0;
+  var eye=$("eye"), eyeImg=$("eyeImg"), bT=0, mx=-1, my=-1, ex=0, ey=0, lastMove=0, sx=0, sy=0;
   function track(e){ mx=e.clientX; my=e.clientY; lastMove=performance.now(); }
   document.addEventListener("pointermove", track, {passive:true});
   document.addEventListener("pointerdown", track, {passive:true});
@@ -828,11 +1010,11 @@ svg.px,.px svg{shape-rendering:crispEdges}
     if(!running) return;
     if(cur==="B"){
       var r=eye.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2, tx, ty, now=performance.now();
-      if(mx<0||now-lastMove>2500){ if(Math.random()<.02){ sx=(Math.random()-.5)*2; sy=(Math.random()-.5)*2; } tx=sx*50; ty=sy*18; }
-      else { tx=Math.max(-1,Math.min(1,(mx-cx)/(r.width*.6)))*58; ty=Math.max(-1,Math.min(1,(my-cy)/(r.height*.8)))*22; }
-      ex+=(tx-ex)*.18; ey+=(ty-ey)*.18;
-      irisG.setAttribute("transform","translate("+ex.toFixed(1)+","+ey.toFixed(1)+")");
-      pupil.setAttribute("r",(25+Math.sin(now/420)*3+(hard?8:0)).toFixed(1));
+      if(mx<0||now-lastMove>2500){ if(Math.random()<.02){ sx=(Math.random()-.5)*2; sy=(Math.random()-.5)*2; } tx=sx*30; ty=sy*20; }
+      else { tx=Math.max(-1,Math.min(1,(mx-cx)/(r.width*.5)))*44; ty=Math.max(-1,Math.min(1,(my-cy)/(r.height*.5)))*30; }
+      ex+=(tx-ex)*.08; ey+=(ty-ey)*.08;
+      var s=1.04+Math.min(.4,(now-bT)/1000*.06);
+      eyeImg.style.transform="translate("+ex.toFixed(1)+"px,"+ey.toFixed(1)+"px) scale("+s.toFixed(3)+")";
     }
     requestAnimationFrame(eyeLoop);
   }
@@ -843,19 +1025,109 @@ svg.px,.px svg{shape-rendering:crispEdges}
     }, 900+Math.random()*2600);
   }
 
+  /* ---------- CCTV CAMERAS ---------- */
+  function alarm(){
+    if(!audio) return;
+    try{
+      var c=audio.ctx, o=c.createOscillator(), g=c.createGain(), t=c.currentTime;
+      o.type="square"; for(var i=0;i<8;i++) o.frequency.setValueAtTime(i%2?660:930, t+i*.22);
+      g.gain.setValueAtTime(.2,t); g.gain.setValueAtTime(.2,t+1.6); g.gain.exponentialRampToValueAtTime(.001,t+1.8);
+      o.connect(g); g.connect(audio.master); o.start(t); o.stop(t+1.85);
+    }catch(e){}
+  }
+  function pad(n){ return (n<10?"0":"")+n; }
+  function cams(){
+    var F=screens.F; F.classList.remove("x-cut","x-who","x-alarm","x-zoom");
+    show("F"); blip();
+    function on(){ return running && cur==="F"; }
+    (function ts(){
+      if(!on()) return;
+      var d=new Date(), s=d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+" "+pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds());
+      [].forEach.call(F.querySelectorAll(".x-ts"), function(e){ e.textContent=s; });
+      later(ts, 250);
+    })();
+    later(function(){
+      if(!on()) return;
+      F.classList.add("x-cut"); staticBurst(.6,.8); shake();
+      [120,200,260,330,380,470,520,600].forEach(function(ms,i){ later(function(){ if(on()) F.classList.toggle("x-who", i%2===0); }, ms); });
+    }, 3000);
+    later(function(){ if(on()){ F.classList.add("x-alarm"); alarm(); } }, 3700);
+    later(function(){ if(on()){ F.classList.remove("x-cut"); F.classList.add("x-zoom"); } }, 5400);
+    later(function(){ if(on()) staticCut(200, loop); }, 6900);
+  }
+
   function loop(){
-    show("B"); shake(); blip();
+    show("B"); bT=performance.now(); shake(); blip();
     later(function(){
       staticCut(180, function(){
         show("C"); shake(); invertFlash(); blip();
         later(function(){
-          staticCut(160, function(){
-            show("D"); shake();
-            later(function(){ staticCut(220, loop); }, 4800);
-          });
+          staticCut(160, function(){ show("D"); shake(); tStep(1); });
         }, 2800);
       });
-    }, 3200);
+    }, 5000);
+  }
+
+  /* ---------- PHONE VERIFICATION (inputs are never stored or sent) ---------- */
+  var tPhone=$("tPhone"), tCode=$("tCode"), tNote=$("tNote"), tT=$("tT"), tSpin=$("tSpin"), tS=[null,$("tS1"),$("tS2"),$("tS3")], tStage=0;
+  function tOk(k){ return running && cur==="D" && tStage===k; }
+  function soft(i){ try{ i.focus({preventScroll:true}); }catch(e){} }
+  function tStep(k){
+    tStage=k; tPhone.value=""; tCode.value="";
+    tS.forEach(function(s,i){ if(s) s.style.display=i===k?"block":"none"; });
+    if(k===1){ tNote.classList.remove("on"); soft(tPhone); later(function(){ if(tOk(1)) tStep(2); }, 20000); }
+    if(k===2){
+      tPhone.blur(); var i=0;
+      (function sp(){ if(!tOk(2)) return; tSpin.textContent="|/-\\"[i++%4]; later(sp, 90); })();
+      later(function(){ if(!tOk(2)) return; tNote.classList.add("on"); blip(); buildSlices(screens.D); later(function(){ if(tOk(2)) tStep(3); }, 1500); }, 2600);
+    }
+    if(k===3){
+      soft(tCode); var n=10;
+      (function cd(){ if(!tOk(3)) return; if(n<=0){ tDone(); return; } tT.textContent="auto-continue in "+(n--); later(cd, 1000); })();
+      later(function(){ tNote.classList.remove("on"); }, 6000);
+    }
+    buildSlices(screens.D);
+  }
+  function tDone(){ if(!tOk(3)) return; tStage=0; tCode.value=""; tCode.blur(); staticCut(220, blackInstall); }
+  function onIn(inp, k, fn){
+    var t=null;
+    inp.addEventListener("keydown", function(e){ if(e.key==="Enter" && tOk(k)){ e.preventDefault(); clearTimeout(t); fn(); } });
+    inp.addEventListener("input", function(){ inp.value=inp.value.slice(-24); if(!tOk(k)) return; clearTimeout(t); t=setTimeout(function(){ if(tOk(k)) fn(); }, 1200); });
+  }
+  onIn(tPhone, 1, function(){ tStep(2); });
+  onIn(tCode, 3, tDone);
+
+  /* ---------- BLACK "installing" SCREEN ---------- */
+  var inst=$("inst"), eGen=0, JUNK="▓░▒#@$%&¥§Ø¿ÆΞ≡";
+  function blackInstall(){
+    show("E"); shake();
+    var g=++eGen, p=0, first=true, t0=performance.now(), buf="", cu=document.createElement("span"); cu.className="cursor";
+    function ok(){ return running && cur==="E" && g===eGen; }
+    function render(){ inst.textContent=buf; inst.appendChild(cu); }
+    render();
+    function line(){
+      if(!ok()) return;
+      if(performance.now()-t0>25000){ staticCut(260, cams); return; }
+      if(!first){ var r=Math.random(); p=r<.45?Math.min(2,p+1):r<.7?Math.max(0,p-1):p; } first=false;
+      var s="installing-"+p+"%-wait...", i=0;
+      (function ch(){
+        if(!ok()) return;
+        if(Math.random()<.1){
+          buf+=JUNK[Math.random()*JUNK.length|0]; render();
+          later(function(){ if(!ok()) return; if(Math.random()<.6){ buf=buf.slice(0,-1); render(); } ch(); }, 180); return;
+        }
+        buf+=s[i++]; render();
+        if(i<s.length) later(ch, 110+Math.random()*190);
+        else { buf=(buf+"\n").split("\n").slice(-15).join("\n"); render(); buildSlices(screens.E); later(line, 900+Math.random()*1500); }
+      })();
+    }
+    (function ghost(){
+      later(function(){
+        if(!ok()) return;
+        screens.B.classList.add("x-ghost"); later(function(){ screens.B.classList.remove("x-ghost"); }, 90); ghost();
+      }, 3500+Math.random()*4500);
+    })();
+    later(line, 700);
   }
 
   function startScare(e){
@@ -869,17 +1141,19 @@ svg.px,.px svg{shape-rendering:crispEdges}
     show("A");
     requestAnimationFrame(eyeLoop);
     later(function(){
-      typeOut(function(){
-        staticCut(300, function(){ chaos(); glitchTick(); subliminal(); blinkLoop(); loop(); });
+      install(function(){
+        errors(function(){
+          staticCut(300, function(){ chaos(); glitchTick(); subliminal(); blinkLoop(); cams(); });
+        });
       });
-    }, 500);
+    }, 300);
   }
 
   function goHard(){
-    hard=1; screens.D.classList.add("hard"); shake(); invertFlash(); blip();
+    hard=1; screens.E.classList.add("hard"); shake(); invertFlash(); blip();
     staticCut(70); 
     clearTimeout(goHard.t);
-    goHard.t=setTimeout(function(){ hard=0; screens.D.classList.remove("hard"); }, 1300);
+    goHard.t=setTimeout(function(){ hard=0; screens.E.classList.remove("hard"); }, 1300);
   }
 
   function stopScare(){
@@ -887,11 +1161,12 @@ svg.px,.px svg{shape-rendering:crispEdges}
     running=false; hard=0;
     clearTimers(); stopAudio();
     scare.classList.remove("on","invert","shake"); $("screen").classList.remove("scaring"); document.body.classList.remove("scaring");
-    stat.classList.remove("on"); sub.classList.remove("on"); screens.D.classList.remove("hard"); eye.classList.remove("shut");
-    show(null); screens.A.innerHTML="";
+    stat.classList.remove("on"); sub.classList.remove("on"); screens.E.classList.remove("hard"); eye.classList.remove("shut");
+    eGen++; tStage=0; tPhone.value=""; tCode.value=""; tPhone.blur(); tCode.blur(); tNote.classList.remove("on"); inst.textContent="";
+    show(null); screens.A.innerHTML=""; screens.F.classList.remove("x-cut","x-who","x-alarm","x-zoom");
     folder.classList.remove("on","sel"); tip.classList.remove("on");
     task.style.display="";
-    setup.classList.add("on"); prog.classList.remove("on"); window.xFront(setup);
+    setup.classList.add("on"); prog.classList.remove("on"); window.xFront(setup); window.xIE();
     fill.style.width="0"; agree.checked=false; dl.disabled=true;
     desk.classList.remove("busy");
     installing=false;
@@ -899,10 +1174,10 @@ svg.px,.px svg{shape-rendering:crispEdges}
 
   document.addEventListener("keydown", function(e){
     if(e.key==="Escape"||e.key==="Esc"){ stopScare(); return; }
-    if(running && cur==="D" && !e.ctrlKey && !e.metaKey && !e.altKey){ e.preventDefault(); goHard(); }
+    if(running && cur==="E" && !e.ctrlKey && !e.metaKey && !e.altKey){ e.preventDefault(); goHard(); }
   });
-  /* a tap or click on the blue screen counts as "press any key" */
-  scare.addEventListener("pointerdown", function(e){ if(running && cur==="D"){ e.preventDefault(); goHard(); } });
+  /* a tap on the black install screen makes it lash out */
+  scare.addEventListener("pointerdown", function(e){ if(running && cur==="E" && e.target.id!=="x"){ e.preventDefault(); goHard(); } });
   var xBtn=$("x");
   xBtn.addEventListener("pointerdown", function(e){ e.stopPropagation(); });
   xBtn.addEventListener("pointerup", function(e){ e.stopPropagation(); stopScare(); });
