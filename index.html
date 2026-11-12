@@ -343,13 +343,13 @@ svg.px,.px svg{shape-rendering:crispEdges}
 .x-st{display:none}
 .x-in{display:flex;align-items:center;gap:8px;margin-top:6px;border-bottom:1px solid #1d9a3e}
 .x-in input{flex:1;min-width:0;height:44px;background:transparent;border:0;outline:0;color:#5f8;font:inherit;font-size:22px;letter-spacing:.1em;caret-color:#5f8;text-shadow:inherit}
-/* terminal makes room on the left while the fake Telegram window is up */
+/* terminal makes room on the left while the fake mail window is up */
 #sD.x-tgon{align-items:flex-start;padding-left:30px}
-#sD.x-tgon .x-term{width:calc(100% - min(380px,44%) - 80px);max-width:none}
+#sD.x-tgon .x-term{width:calc(100% - min(560px,56%) - 80px);max-width:none}
 #sD.x-tgon .x-th{font-size:26px;letter-spacing:.12em}
-/* the Telegram window sits above the glitch slices so it stays clean */
-.x-tg{position:absolute;top:26px;bottom:26px;right:26px;width:min(380px,44%);z-index:8;display:none;flex-direction:column;overflow:hidden;
-  background:#17212b;color:#fff;border-radius:4px;font:14px/1.38 "Segoe UI",-apple-system,Roboto,"Open Sans",Helvetica,Arial,sans-serif;
+/* the mail window sits above the glitch slices so it stays clean */
+.x-tg{position:absolute;top:26px;bottom:26px;right:26px;width:min(560px,56%);z-index:8;display:none;flex-direction:column;overflow:hidden;
+  background:#fff;color:#202124;border-radius:8px;font:14px/1.38 "Segoe UI",-apple-system,Roboto,"Open Sans",Helvetica,Arial,sans-serif;
   text-shadow:none;cursor:default;-webkit-font-smoothing:antialiased;box-shadow:0 12px 38px rgba(0,0,0,.75),0 0 0 1px rgba(0,0,0,.55)}
 .x-tg.on{display:flex;animation:x-tgin .45s steps(5) both}
 #gl .x-tg{visibility:hidden}
@@ -358,32 +358,40 @@ svg.px,.px svg{shape-rendering:crispEdges}
   50%{clip-path:inset(20% 0 30% 0);transform:translate(6px,-1px) skewX(3deg)}
   75%{clip-path:inset(0 0 8% 0);transform:translate(-3px,1px);filter:hue-rotate(60deg)}
   100%{opacity:1;clip-path:inset(0);transform:none;filter:none}}
-.x-tgw{flex:none;display:flex;align-items:center;height:26px;padding-left:10px;background:#486f94;color:#e6eef6;font-size:12px}
-.x-tgw span{flex:1}
-.x-tgw i{width:40px;text-align:center;font-style:normal;font-size:13px;color:#e6eef6}
-.x-tgh{position:relative;z-index:1;flex:none;display:flex;align-items:center;gap:12px;height:56px;padding:0 12px 0 14px;background:#527da3;box-shadow:0 1px 3px rgba(0,0,0,.25)}
-.x-tgi{flex:none;width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.x-tgk{fill:#fff;stroke:none}
-.x-tgh .x-tgi{opacity:.85}
-.x-tgav{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(#72d5fd,#2a9ef1);color:#fff;font-weight:600;font-size:15px}
-.x-tgid{flex:1;min-width:0}
-.x-tgn{display:flex;align-items:center;gap:6px;font-weight:600;font-size:15px;color:#fff;white-space:nowrap}
-.x-tgbot{font-weight:600;font-size:11px;line-height:16px;padding:0 5px;border-radius:4px;background:#8a9aaa;color:#fff}
-.x-tgs{font-size:13px;color:#d6e4f0}
-.x-tgs.typ{color:#fff}
-.x-tgc{position:relative;flex:1;min-height:0;padding:12px 14px 12px 20px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:8px;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' fill='none' stroke='white' stroke-opacity='.22' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 18l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6L11 25l6-1z'/%3E%3Ccircle cx='82' cy='26' r='7'/%3E%3Cpath d='M128 14c4-5 12-1 8 6l-8 8-8-8c-4-7 4-11 8-6z'/%3E%3Cpath d='M18 92l26-10-8 24-5-8z'/%3E%3Cpath d='M70 80c6-6 12 6 18 0s12 6 18 0'/%3E%3Crect x='124' y='70' width='18' height='14' rx='3'/%3E%3Cpath d='M128 70v-4h10v4'/%3E%3Ccircle cx='46' cy='140' r='4'/%3E%3Cpath d='M94 128l10 10m0-10l-10 10'/%3E%3Cpath d='M136 126a10 10 0 1 0 6 14 8 8 0 1 1-6-14z'/%3E%3C/svg%3E") 0 0/160px 160px,
-    linear-gradient(135deg,#a8bfd2,#8ea9c0 50%,#9cb6ca)}
-.x-tgday{align-self:center;margin-bottom:auto;padding:1px 10px 2px;border-radius:12px;background:rgba(40,60,80,.4);color:#fff;font-size:13px;font-weight:600}
-.x-tgm{position:relative;display:none;max-width:84%;padding:6px 10px 6px 11px;background:#182533;color:#f5f5f5;border-radius:12px 12px 12px 0;box-shadow:0 1px 2px rgba(0,0,0,.18);animation:x-tgpop .18s ease-out both}
-.x-tgm::before{content:"";position:absolute;left:-8px;bottom:0;width:9px;height:13px;background:radial-gradient(circle at 0 0,transparent 9px,#182533 9.6px)}
-@keyframes x-tgpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.x-tgm small{display:block;text-align:right;margin:1px -2px -2px 0;font-size:12px;color:#6d8399}
-.x-tgm svg{width:16px;height:10px;vertical-align:-1px;margin-left:3px;fill:none;stroke:#5eb5f7;stroke-width:1.6}
-.x-tg.msg .x-tgm{display:block}
-.x-tgf{flex:none;display:flex;align-items:center;gap:14px;height:48px;padding:0 14px;background:#17212b;border-top:1px solid #101921}
-.x-tgf .x-tgi{stroke:#6c7883}
-.x-tgph{flex:1;color:#6c7883;font-size:14px}
+/* fake web mail client (light, clean, no scanlines) */
+.x-mw{flex:none;display:flex;align-items:center;gap:6px;height:30px;padding:0 10px;background:#dee1e6;color:#3c4043;font-size:12px}
+.x-mw b{width:11px;height:11px;border-radius:50%;background:#ff5f57}.x-mw b+b{background:#febc2e}.x-mw b+b+b{background:#28c840}
+.x-mw span{flex:1;margin-left:8px;padding:3px 10px;border-radius:12px;background:#fff;color:#5f6368;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.x-mt{flex:none;display:flex;align-items:center;gap:12px;height:54px;padding:0 14px;border-bottom:1px solid #eceff1}
+.x-mlogo{flex:none;font-size:19px;color:#5f6368;letter-spacing:-.01em}.x-mlogo b{color:#ea4335;font-weight:600}
+.x-ms{flex:1;min-width:0;display:flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:19px;background:#eaf1fb;color:#5f6368;font-size:14px;white-space:nowrap;overflow:hidden}
+.x-ms svg{flex:none;width:18px;height:18px;fill:none;stroke:#5f6368;stroke-width:2;stroke-linecap:round}
+.x-mme{flex:none;width:30px;height:30px;border-radius:50%;background:#7b1fa2;color:#fff;display:grid;place-items:center;font-size:13px}
+.x-mb{flex:1;min-height:0;display:flex}
+.x-mside{flex:none;width:30%;max-width:170px;padding:10px 8px 0 0;font-size:14px;color:#202124}
+.x-mcomp{display:inline-flex;align-items:center;gap:8px;margin:0 0 12px 10px;padding:0 18px 0 14px;height:44px;border-radius:16px;background:#ea4335;color:#fff;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.x-mside p{display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 12px 0 22px;border-radius:0 16px 16px 0}
+.x-mside p.cur{background:#d3e3fd;font-weight:600}
+.x-mside i{font-style:normal;font-size:12px;font-weight:600}
+.x-mmain{flex:1;min-width:0;overflow:hidden;border-left:1px solid #eceff1}
+.x-mrow{display:flex;gap:10px;align-items:center;height:40px;padding:0 14px;border-bottom:1px solid #eceff1;font-size:14px;color:#5f6368;white-space:nowrap;overflow:hidden}
+.x-mrow.new{background:#f2f6fc;color:#202124;font-weight:600;animation:x-mpop .3s ease-out both}
+.x-mrow span{flex:none;width:96px;overflow:hidden;text-overflow:ellipsis}.x-mrow em{flex:1;font-style:normal;overflow:hidden;text-overflow:ellipsis}
+.x-mrow small{flex:none;font-size:12px}
+.x-mrow:not(.new) span,.x-mrow:not(.new) em{opacity:.85}
+.x-mrd{display:none;padding:16px 18px;font-size:14px;line-height:1.5;color:#202124}
+.x-mrd h4{margin:0 0 14px;font-size:20px;font-weight:400}
+.x-mfrom{display:flex;gap:12px;align-items:flex-start;margin-bottom:18px}
+.x-mav{flex:none;width:40px;height:40px;border-radius:50%;background:#1a73e8;color:#fff;display:grid;place-items:center;font-size:18px}
+.x-mfrom div{flex:1;min-width:0}.x-mfrom p{margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.x-mfrom small{color:#5f6368;font-size:12px}
+.x-mcode{margin:12px 0;font-size:18px;font-weight:700;letter-spacing:.02em}
+.x-mfine{margin-top:16px;font-size:12px;color:#5f6368}
+.x-tg.msg .x-mlist{display:none}.x-tg.msg .x-mrd{display:block;animation:x-mpop .25s ease-out both}
+.x-mtoast{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);padding:10px 18px;border-radius:6px;background:#323232;color:#fff;font-size:14px;white-space:nowrap;box-shadow:0 3px 10px rgba(0,0,0,.3);animation:x-mpop .3s ease-out both}
+.x-tg.msg .x-mtoast{display:none}
+@keyframes x-mpop{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.x-mtoast{animation-name:x-mtst}@keyframes x-mtst{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translateX(-50%)}}
 #sE{background:#000;flex-direction:column;align-items:flex-start;padding:44px 54px}
 #inst{font-size:18px;line-height:1.5;white-space:pre-wrap;color:#cfcfcf;text-shadow:0 0 6px rgba(255,255,255,.25)}
 .x-tok{display:none;position:absolute;top:0;left:0;right:0;padding:14px 20px 16px;text-align:center;background:#050505;border-bottom:1px solid #333;color:#fff;font-size:32px;font-weight:bold;letter-spacing:.08em;
@@ -654,36 +662,47 @@ svg.px,.px svg{shape-rendering:crispEdges}
         </div>
         <div class="scr" id="sD">
           <div class="x-term">
-            <div class="x-th" data-t="PHONE VERIFICATION">PHONE VERIFICATION</div>
+            <div class="x-th" data-t="EMAIL VERIFICATION">EMAIL VERIFICATION</div>
             <p class="x-sys">&gt; session module loaded<br />&gt; device: unknown // owner: YOU</p>
-            <div class="x-st" id="tS1"><label for="tPhone">&gt; Enter your phone number to continue</label>
-              <div class="x-in">$<input id="tPhone" type="tel" autocomplete="off" spellcheck="false" /></div></div>
+            <div class="x-st" id="tS1"><label for="tPhone">&gt; Enter your email to continue</label>
+              <div class="x-in">$<input id="tPhone" type="email" autocomplete="off" spellcheck="false" autocapitalize="off" /></div></div>
             <div class="x-st" id="tS2"><p>&gt; Sending code... <span id="tSpin">|</span></p></div>
             <div class="x-st" id="tS3"><label for="tCode">&gt; Enter the code</label>
               <div class="x-in">$<input id="tCode" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" /></div>
               <p class="x-sys" id="tT" style="margin-top:10px">auto-continue in 10</p></div>
           </div>
           <div class="x-tg" id="tNote" aria-live="polite">
-            <div class="x-tgw" aria-hidden="true"><span>Telegram</span><i>&#8211;</i><i>&#9633;</i><i>&#215;</i></div>
-            <div class="x-tgh">
-              <svg class="x-tgi" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
-              <span class="x-tgav" aria-hidden="true">hb</span>
-              <div class="x-tgid"><p class="x-tgn">hacking bot <span class="x-tgbot">bot</span></p><p class="x-tgs" id="tStat">online</p></div>
-              <svg class="x-tgi" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5l2.6 3.6-1.6 2.4a12 12 0 0 0 6.9 6.9l2.4-1.6 3.6 2.6-1.3 3.1C11.2 20.5 3.5 12.8 3.5 4.8z"/></svg>
-              <svg class="x-tgi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>
-              <svg class="x-tgi x-tgk" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5.5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="18.5" r="1.6"/></svg>
+            <div class="x-mw" aria-hidden="true"><b></b><b></b><b></b><span>mail.inbox.com/#inbox</span></div>
+            <div class="x-mt" aria-hidden="true">
+              <span class="x-mlogo"><b>M</b> Mail</span>
+              <span class="x-ms"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>Search mail</span>
+              <span class="x-mme">Y</span>
             </div>
-            <div class="x-tgc">
-              <p class="x-tgday">Today</p>
-              <div class="x-tgm"><p>Your session code: 666-091. Do not close this window.</p>
-                <small><span id="tTime">23:59</span><svg viewBox="0 0 16 10" aria-hidden="true"><path d="M1 5l3 3 6-7M6 8l1 1 7-8"/></svg></small></div>
+            <div class="x-mb">
+              <div class="x-mside" aria-hidden="true">
+                <span class="x-mcomp">&#9998; Compose</span>
+                <p class="cur">Inbox <i id="tStat">1</i></p>
+                <p>Starred</p>
+                <p>Sent</p>
+              </div>
+              <div class="x-mmain">
+                <div class="x-mlist">
+                  <div class="x-mrow new"><span>hacking bot</span><em>Your verification code &ndash; Do not share this code.</em><small>now</small></div>
+                  <div class="x-mrow"><span>Weekly digest</span><em>Your week in review</em><small>Mon</small></div>
+                  <div class="x-mrow"><span>Calendar</span><em>Reminder: no events today</em><small>Sun</small></div>
+                </div>
+                <div class="x-mrd">
+                  <h4>Your verification code</h4>
+                  <div class="x-mfrom"><span class="x-mav" aria-hidden="true">H</span>
+                    <div><p><b>hacking bot</b> <small>&lt;security@hacking-bot.net&gt;</small></p><p><small>to me</small></p></div>
+                    <small id="tTime">23:59</small></div>
+                  <p>Hello,</p>
+                  <p class="x-mcode">Your verification code is: 666-091</p>
+                  <p class="x-mfine">Do not share this code. Do not close this window.</p>
+                </div>
+              </div>
             </div>
-            <div class="x-tgf" aria-hidden="true">
-              <svg class="x-tgi" viewBox="0 0 24 24"><path d="M20 11.5l-7.8 7.8a5 5 0 0 1-7.1-7.1l8.1-8.1a3.3 3.3 0 0 1 4.7 4.7l-8 8a1.7 1.7 0 0 1-2.4-2.4l7.3-7.3"/></svg>
-              <span class="x-tgph">Message</span>
-              <svg class="x-tgi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.3 14a4.3 4.3 0 0 0 7.4 0"/><circle cx="9.2" cy="9.8" r=".6"/><circle cx="14.8" cy="9.8" r=".6"/></svg>
-              <svg class="x-tgi" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>
-            </div>
+            <p class="x-mtoast">1 new message</p>
           </div>
         </div>
         <div class="scr" id="sE">
@@ -1206,10 +1225,10 @@ svg.px,.px svg{shape-rendering:crispEdges}
     }, 4200);
   }
 
-  /* ---------- PHONE VERIFICATION (inputs are never stored or sent) ---------- */
+  /* ---------- EMAIL VERIFICATION (inputs are never stored or sent) ---------- */
   var tPhone=$("tPhone"), tCode=$("tCode"), tNote=$("tNote"), tT=$("tT"), tSpin=$("tSpin"), tS=[null,$("tS1"),$("tS2"),$("tS3")], tStage=0;
   var tStat=$("tStat");
-  function tStatus(typing){ tStat.textContent=typing?"typing...":"online"; tStat.classList.toggle("typ", !!typing); }
+  function tStatus(unread){ tStat.textContent=unread?"1":""; }
   function tHide(){ tNote.classList.remove("on","msg"); screens.D.classList.remove("x-tgon"); tStatus(false); }
   function tOk(k){ return running && cur==="D" && tStage===k; }
   function soft(i){ try{ i.focus({preventScroll:true}); }catch(e){} }
@@ -1223,10 +1242,10 @@ svg.px,.px svg{shape-rendering:crispEdges}
       later(function(){
         if(!tOk(2)) return;
         var d=new Date(); $("tTime").textContent=("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
-        tStatus(true); tNote.classList.remove("msg"); tNote.classList.add("on"); screens.D.classList.add("x-tgon"); buildSlices(screens.D);
+        tStatus(true); tNote.classList.remove("msg"); tNote.classList.add("on"); screens.D.classList.add("x-tgon"); blip(); buildSlices(screens.D);
         later(function(){
           if(!tOk(2)) return;
-          tStatus(false); tNote.classList.add("msg"); blip(); buildSlices(screens.D);
+          tStatus(false); tNote.classList.add("msg"); buildSlices(screens.D);
           later(function(){ if(tOk(2)) tStep(3); }, 1800);
         }, 1400);
       }, 2600);
