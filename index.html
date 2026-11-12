@@ -4,234 +4,382 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Happy Computer</title>
-<script>
-(function(){
-  var mm=function(q){ return !!(window.matchMedia && window.matchMedia(q).matches); };
-  var ua=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent||"");
-  var touch=(navigator.maxTouchPoints||0)>0 && !mm("(pointer: fine)");
-  if(mm("(pointer: coarse)") || ua || touch) document.documentElement.classList.add("x-mobile");
-})();
-</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;height:100%;overflow:hidden;background:#05070a}
-body{font-family:"Fixedsys","Terminal","MS Sans Serif",Tahoma,"Courier New",monospace;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:none}
+html,body{width:100%;height:100%;overflow:hidden;background:#05070a;overscroll-behavior:none}
+body{font-family:"MS Sans Serif","Microsoft Sans Serif",Tahoma,Geneva,sans-serif;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:none;
+  touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.lic{-webkit-user-select:text;user-select:text}
 button{font:inherit;color:inherit}
+svg.px,.px svg{shape-rendering:crispEdges}
 
-/* ---------- LANDSCAPE CRT FRAME ---------- */
-#frame{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:
-  radial-gradient(ellipse at center,#0b0e12 0%,#000 100%)}
-#screen{position:relative;overflow:hidden;background:#000;border-radius:18px;
-  box-shadow:0 0 0 6px #15181c,0 0 0 10px #2a2e33,0 0 60px rgba(0,0,0,.9),inset 0 0 90px rgba(0,0,0,.55)}
+/* ---------- CRT ---------- */
+#frame{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#14171b 0%,#030405 75%)}
+#screen{position:relative;overflow:hidden;background:#000;border-radius:4.5%/7%;
+  box-shadow:0 0 0 8px #1a1d21,0 0 0 12px #2c3035,0 0 0 13px #0c0d0f,0 30px 80px rgba(0,0,0,.9)}
 #stage{position:absolute;left:0;top:0;width:960px;height:540px;transform-origin:top left;
-  image-rendering:pixelated;filter:saturate(.78) contrast(.93) brightness(1.03) blur(.35px);
-  text-shadow:-1px 0 rgba(255,46,46,.45),1px 0 rgba(44,164,255,.4)}
-#stage img,#stage canvas{image-rendering:pixelated}
-
-/* CRT overlays (physical size, above the stage) */
+  filter:saturate(.82) contrast(.95) brightness(1.04) blur(.3px);
+  text-shadow:-.8px 0 rgba(255,40,40,.42),.8px 0 rgba(40,160,255,.4),0 0 3px rgba(255,255,255,.18)}
 .crt{position:absolute;inset:0;pointer-events:none;z-index:50}
-#scan{background:repeating-linear-gradient(0deg,rgba(0,0,0,.42) 0 1px,rgba(0,0,0,.08) 1px 2px,transparent 2px 4px);
-  animation:flick 2.4s steps(2) infinite}
-#mask{background:
-  radial-gradient(ellipse 120% 120% at center,transparent 52%,rgba(0,0,0,.55) 86%,rgba(0,0,0,.95) 100%);
-  border-radius:18px;box-shadow:inset 0 0 70px rgba(0,0,0,.85),inset 0 0 18px rgba(0,0,0,.9)}
-#bulge{background:
-  linear-gradient(100deg,rgba(255,255,255,.07) 0 14%,transparent 42%),
-  linear-gradient(0deg,rgba(0,0,0,.25),transparent 18%,transparent 82%,rgba(0,0,0,.25))}
-#grain{opacity:.1;mix-blend-mode:screen}
-#roll{background:linear-gradient(180deg,transparent,rgba(255,255,255,.085) 42%,rgba(255,255,255,.12) 50%,rgba(255,255,255,.085) 58%,transparent);
-  height:14%;top:-20%;animation:roll 7.5s linear infinite}
-#jitterbar{position:absolute;left:0;right:0;height:3px;background:rgba(255,255,255,.22);top:30%;opacity:0;z-index:51;pointer-events:none}
-@keyframes flick{0%,100%{opacity:.92}50%{opacity:1}}
+#grille{background:repeating-linear-gradient(90deg,rgba(255,0,0,.05) 0 1px,rgba(0,255,0,.04) 1px 2px,rgba(0,0,255,.05) 2px 3px);mix-blend-mode:screen}
+#scan{background:repeating-linear-gradient(0deg,rgba(0,0,0,.38) 0 1px,rgba(0,0,0,.06) 1px 2px,transparent 2px 3px);animation:flick 2.4s steps(2) infinite}
+#glow{background:radial-gradient(ellipse 70% 60% at 50% 48%,rgba(160,220,255,.07),transparent 70%);mix-blend-mode:screen}
+#mask{border-radius:4.5%/7%;background:radial-gradient(ellipse 115% 125% at center,transparent 50%,rgba(0,0,0,.5) 82%,rgba(0,0,0,.97) 100%);
+  box-shadow:inset 0 0 80px rgba(0,0,0,.85),inset 0 0 22px rgba(0,0,0,.95),inset 0 0 4px #000}
+#bulge{border-radius:4.5%/7%;background:
+  radial-gradient(ellipse 60% 40% at 30% 18%,rgba(255,255,255,.09),transparent 70%),
+  linear-gradient(0deg,rgba(0,0,0,.28),transparent 16%,transparent 84%,rgba(0,0,0,.28)),
+  linear-gradient(90deg,rgba(0,0,0,.28),transparent 10%,transparent 90%,rgba(0,0,0,.28))}
+#grain{opacity:.09;mix-blend-mode:screen;width:100%;height:100%}
+#roll{background:linear-gradient(180deg,transparent,rgba(255,255,255,.06) 40%,rgba(255,255,255,.11) 50%,rgba(255,255,255,.06) 60%,transparent);
+  height:16%;top:-20%;bottom:auto;animation:roll 8s linear infinite}
+#jitterbar{position:absolute;left:0;right:0;height:3px;background:rgba(255,255,255,.2);top:30%;opacity:0;z-index:51;pointer-events:none}
+@keyframes flick{0%,100%{opacity:.9}50%{opacity:1}}
 @keyframes roll{0%{top:-20%}100%{top:112%}}
 @media (prefers-reduced-motion:reduce){#roll,#scan{animation:none}}
 
-/* ---------- PHONES / TABLETS: PC-ONLY ERROR ---------- */
-#mob{display:none}
-html.x-mobile #frame{display:none}
-html.x-mobile #mob{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:#000}
-#mob .x-tv{position:relative;width:100%;height:100%;overflow:hidden;border-radius:18px;background:#008080;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 0 6px #15181c,0 0 0 10px #2a2e33,0 0 60px rgba(0,0,0,.9);
-  filter:saturate(.78) contrast(.93) brightness(1.03);font-family:"MS Sans Serif",Tahoma,"Fixedsys",monospace;color:#000;
-  text-shadow:-1px 0 rgba(255,46,46,.45),1px 0 rgba(44,164,255,.4)}
-#mob .win{position:relative;display:block;width:min(340px,86vw)}
-#mob .wbody{align-items:flex-start}
-#mob .wbody p{font-size:14px;max-width:none}
-#mob .x-err{flex:none;width:34px;height:34px;border-radius:50%;background:#e01010;color:#fff;font:bold 20px/34px Tahoma,sans-serif;text-align:center;text-shadow:none;
-  box-shadow:inset -2px -2px 0 #800000,1px 1px 0 #000}
-#mob .row{justify-content:center}
-#mob .b98{min-height:44px;min-width:96px;font-size:13px}
-#mob .x-scan{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.42) 0 1px,rgba(0,0,0,.08) 1px 2px,transparent 2px 4px);animation:flick 2.4s steps(2) infinite}
-#mob .x-vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 120% 120% at center,transparent 52%,rgba(0,0,0,.55) 86%,rgba(0,0,0,.95) 100%);
-  box-shadow:inset 0 0 70px rgba(0,0,0,.85)}
-@media (prefers-reduced-motion:reduce){#mob .x-scan{animation:none}}
+/* ---------- SMALL SCREENS: letterboxed frame, compact stage ---------- */
+@media (max-width:719px){
+  #screen{border-radius:3%/5%;box-shadow:0 0 0 3px #1a1d21,0 0 0 4px #2c3035,0 10px 30px rgba(0,0,0,.9)}
+  #mask,#bulge{border-radius:3%/5%}
+}
+#hint{display:none;position:fixed;left:0;right:0;bottom:max(18px,env(safe-area-inset-bottom));text-align:center;color:#a3abb3;font:12px/1.4 Tahoma,Verdana,sans-serif;letter-spacing:.04em;pointer-events:none}
+@media (max-width:719px) and (orientation:portrait){ #hint{display:block} body.scaring #hint{display:none} }
+#stage.x-compact #icons{top:2px;grid-template-rows:repeat(4,100px);gap:0 4px}
+#stage.x-compact .icon{width:100px;min-height:100px;justify-content:flex-start;padding-top:8px}
+/* invisible hit borders: the control looks the same but its tap area reaches 44 css px when scaled down */
+#stage.x-compact .b98{height:102px;min-width:152px;font-size:13px;border:36px solid transparent;background-clip:padding-box;margin:-36px}
+#stage.x-compact .b98.def{box-shadow:inset 0 0 0 1px #000,inset -2px -2px 0 #0a0a0a,inset 2px 2px 0 #fff,inset -3px -3px 0 #808080,inset 3px 3px 0 #dfdfdf}
+#stage.x-compact .b98.def:active{box-shadow:inset 0 0 0 1px #000,inset 2px 2px 0 #0a0a0a,inset -2px -2px 0 #fff,inset 3px 3px 0 #808080,inset -3px -3px 0 #dfdfdf}
+#stage.x-compact .b98::before{display:none}
+#stage.x-compact #start{height:95px;border:36px solid transparent;background-clip:padding-box;margin:-36px;margin-right:-34px;position:relative;z-index:1}
+#stage.x-compact .chk{font-size:13px;padding:6px 0}
+#stage.x-compact .chk input{width:16px;height:16px;background-position:4px 4px}
+#stage.x-compact .lic{height:96px}
+#stage.x-compact .bsod{width:92%}
 
-/* ---------- PHASE 1: WIN98 DESKTOP ---------- */
-#desk{position:absolute;inset:0;background:#008080;font-family:"MS Sans Serif",Tahoma,"Fixedsys",monospace;font-size:12px;color:#000}
-#icons{position:absolute;left:10px;top:8px;width:84px;display:flex;flex-direction:column;gap:6px}
-.icon{width:84px;background:none;border:1px dotted transparent;display:flex;flex-direction:column;align-items:center;gap:4px;
-  padding:4px 2px;cursor:default;user-select:none;-webkit-user-select:none;font:inherit}
-.icon .gl{font-size:28px;line-height:30px;filter:saturate(.8)}
-.icon .nm{color:#fff;font-size:12px;line-height:1.15;text-align:center;text-shadow:1px 1px 0 #000}
-.icon:hover,.icon:focus{border-color:#fff;outline:none}
-.icon:hover .nm,.icon:focus .nm{background:#000080}
+/* ---------- WIN98 DESKTOP ---------- */
+#desk{position:absolute;inset:0;font-size:12px;color:#000;overflow:hidden;
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='20' shape-rendering='crispEdges'><path d='M.5 .5v16l4-4 3 7 2-1-3-6.5h5.5z' fill='white' stroke='black'/></svg>") 0 0,default}
+#desk.busy,#desk.busy *{cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='22' shape-rendering='crispEdges'><path d='M.5 .5h13v3l-5 7.5 5 7.5v3H.5v-3l5-7.5-5-7.5z' fill='white' stroke='black'/><path d='M3 4h8l-4 5zM3 19l4-4 4 4z' fill='%23000080'/></svg>") 7 11,wait}
+#wall{position:absolute;inset:0;width:100%;height:100%}
+#icons{position:absolute;left:8px;top:8px;display:grid;grid-auto-flow:column;grid-template-rows:repeat(5,76px);gap:2px 8px}
+.icon{width:78px;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:2px;cursor:inherit;user-select:none;-webkit-user-select:none;outline:none}
+.icon svg{width:32px;height:32px;display:block}
+.icon .nm{color:#fff;font-size:12px;line-height:14px;text-align:center;padding:0 2px;border:1px dotted transparent}
+.icon.sel svg{filter:sepia(1) hue-rotate(185deg) saturate(5) brightness(.55)}
+.icon.sel .nm{background:#000080;border-color:#ffff80}
 
 /* taskbar */
-#bar{position:absolute;left:0;right:0;bottom:0;height:30px;background:#c0c0c0;display:flex;align-items:center;gap:6px;padding:3px 4px;
-  box-shadow:inset 0 2px 0 #fff,inset 0 -1px 0 #808080}
-#start{display:flex;align-items:center;gap:5px;height:24px;padding:0 8px;font-weight:bold;font-size:12px;background:#c0c0c0;border:0;cursor:default;
-  box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf}
-#start:active{box-shadow:inset 1px 1px 0 #000,inset -1px -1px 0 #fff,inset 2px 2px 0 #808080}
-.flag{width:14px;height:13px;display:grid;grid-template:1fr 1fr/1fr 1fr;gap:1px;transform:skewX(-8deg)}
-.flag i{display:block}
-.flag i:nth-child(1){background:#f00}.flag i:nth-child(2){background:#0a0}
-.flag i:nth-child(3){background:#00a}.flag i:nth-child(4){background:#fc0}
-#tasks{flex:1;display:flex;gap:4px;overflow:hidden}
-.task{max-width:180px;height:24px;display:flex;align-items:center;gap:5px;padding:0 8px;font-size:12px;background:#c0c0c0;white-space:nowrap;overflow:hidden;
-  box-shadow:inset 1px 1px 0 #000,inset -1px -1px 0 #fff,inset 2px 2px 0 #808080}
-#tray{display:flex;align-items:center;gap:6px;height:24px;padding:0 8px;font-size:12px;
-  box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff}
-#tray .ti{font-size:12px;line-height:1}
+#bar{position:absolute;left:0;right:0;bottom:0;height:30px;background:#c0c0c0;display:flex;align-items:center;gap:4px;padding:3px 2px 2px;
+  box-shadow:inset 0 1px 0 #dfdfdf,inset 0 2px 0 #fff;z-index:30}
+#start{display:flex;align-items:center;gap:4px;height:23px;padding:0 6px 0 4px;font-weight:bold;font-size:12px;background:#c0c0c0;border:0;cursor:inherit}
+.bev{box-shadow:inset -1px -1px 0 #0a0a0a,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf}
+.bev:active,.bev.down{box-shadow:inset 1px 1px 0 #0a0a0a,inset -1px -1px 0 #fff,inset 2px 2px 0 #808080,inset -2px -2px 0 #dfdfdf}
+#start svg{width:20px;height:17px}
+.sep{width:2px;height:22px;box-shadow:inset 1px 0 #808080,inset -1px 0 #fff;margin:0 2px}
+#tasks{flex:1;display:flex;gap:3px;overflow:hidden}
+.task{width:170px;height:23px;display:flex;align-items:center;gap:4px;padding:0 6px;font-size:12px;font-weight:bold;background:#c0c0c0 repeating-conic-gradient(#fff 0 25%,#c0c0c0 0 50%) 0 0/2px 2px;white-space:nowrap;overflow:hidden}
+.task svg{width:16px;height:16px;flex:none}
+#tray{display:flex;align-items:center;gap:6px;height:23px;padding:0 10px 0 8px;font-size:12px;box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff}
+#tray svg{width:16px;height:16px}
 
 /* balloon tip */
-#tip{position:absolute;right:12px;bottom:40px;width:210px;background:#ffffe1;border:1px solid #000;padding:8px 10px;font-size:12px;line-height:1.35;display:none;z-index:9}
+#tip{position:absolute;right:14px;bottom:42px;width:220px;background:#ffffe1;border:1px solid #000;border-radius:6px;padding:8px 10px;font-size:12px;line-height:1.35;display:none;z-index:31}
 #tip.on{display:block}
 #tip b{display:block;margin-bottom:3px}
-#tip::after{content:"";position:absolute;right:26px;bottom:-9px;width:0;height:0;border:9px solid transparent;border-top-color:#ffffe1;border-bottom:0}
+#tip::after{content:"";position:absolute;right:30px;bottom:-10px;border:10px solid transparent;border-top-color:#000;border-bottom:0}
+#tip::before{content:"";position:absolute;right:31px;bottom:-8px;border:9px solid transparent;border-top-color:#ffffe1;border-bottom:0;z-index:1}
 
-/* win98 window */
+/* windows */
 .win{position:absolute;background:#c0c0c0;padding:3px;display:none;z-index:8;
-  box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #dfdfdf,inset -2px -2px 0 #808080,inset 2px 2px 0 #fff,3px 3px 0 rgba(0,0,0,.35)}
+  box-shadow:inset -1px -1px 0 #0a0a0a,inset 1px 1px 0 #dfdfdf,inset -2px -2px 0 #808080,inset 2px 2px 0 #fff,2px 2px 0 rgba(0,0,0,.3)}
 .win.on{display:block}
-.tbar{display:flex;align-items:center;height:22px;padding:0 2px 0 4px;color:#fff;font-weight:bold;font-size:12px;letter-spacing:.02em;
-  background-color:#000080;background-image:linear-gradient(90deg,#000080 0%,#1084d0 100%);text-shadow:none}
+.tbar{display:flex;align-items:center;gap:3px;height:18px;padding:0 2px 0 3px;color:#fff;font-weight:bold;font-size:12px;
+  background-color:#000080;background-image:linear-gradient(90deg,#000080,#1084d0);text-shadow:none;touch-action:none;user-select:none;-webkit-user-select:none}
+.win.blur .tbar{background-color:#555;background-image:linear-gradient(90deg,#555,#7a7a7a);color:#fff}
+.tbar svg{width:16px;height:16px;flex:none}
 .tbar .t{flex:1;overflow:hidden;white-space:nowrap}
-.tb{display:block;width:18px;height:16px;margin-left:2px;background:#c0c0c0;color:#000;font-size:12px;font-weight:bold;line-height:13px;text-align:center;border:0;cursor:default;
-  box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf;text-shadow:none}
-.wbody{padding:14px 14px 12px;display:flex;gap:14px}
-.wbody .shield{font-size:34px;line-height:1}
-.wbody h2{font-size:13px;margin-bottom:8px}
-.wbody p{font-size:12px;line-height:1.5;max-width:330px}
-.row{display:flex;justify-content:flex-end;gap:8px;padding:0 14px 14px}
-.b98{min-width:86px;height:26px;padding:0 12px;background:#c0c0c0;font-size:12px;border:0;cursor:default;
-  box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf}
-.b98:active{box-shadow:inset 1px 1px 0 #000,inset -1px -1px 0 #fff,inset 2px 2px 0 #808080}
-.b98.def{box-shadow:inset -1px -1px 0 #000,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf,0 0 0 1px #000}
+.tb{width:16px;height:14px;margin-left:0;background:#c0c0c0;border:0;padding:0;display:flex;align-items:center;justify-content:center;cursor:inherit}
+.tb svg{width:8px;height:7px}
+.tb.x{margin-left:2px}
+.b98{min-width:75px;height:23px;padding:0 10px;background:#c0c0c0;font-size:12px;border:0;cursor:inherit;outline:none;position:relative}
+.b98:focus-visible::after,.b98.def:focus::after{content:"";position:absolute;inset:4px;border:1px dotted #000}
+.b98.def{box-shadow:0 0 0 1px #000,inset -1px -1px 0 #0a0a0a,inset 1px 1px 0 #fff,inset -2px -2px 0 #808080,inset 2px 2px 0 #dfdfdf}
+.b98:disabled{color:#4a4a4a;text-shadow:1px 1px 0 #fff}
+#msg .mb{display:flex;gap:12px;align-items:flex-start;padding:16px 14px 4px;font-size:12px;line-height:1.45}
+#msg .mb svg{width:32px;height:32px;flex:none}
+#msg .row{justify-content:center}
+.b98::before,.tb::before,.chk::before{content:"";position:absolute;inset:-8px -3px}
+.tb,.chk{position:relative}
+.row{display:flex;justify-content:flex-end;gap:6px;padding:10px 10px 8px}
 .wiggle{animation:wig .4s linear}
-@keyframes wig{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@keyframes wig{0%,100%{translate:0}20%{translate:-5px}40%{translate:5px}60%{translate:-3px}80%{translate:3px}}
 
-/* progress window */
-#prog .pbody{padding:14px 14px 10px;width:100%}
-#prog p{font-size:12px;margin-bottom:9px}
-.track{height:20px;background:#c0c0c0;padding:2px;box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff,inset 2px 2px 0 #000}
-.blocks{height:100%;width:0;background:repeating-linear-gradient(90deg,#000080 0 10px,#c0c0c0 10px 12px)}
-#pct{font-size:12px;margin-top:8px;margin-bottom:0}
+/* wizard */
+.wiz{display:flex;height:268px}
+.side{width:150px;flex:none;margin:8px 0 0 8px;background:linear-gradient(180deg,#000080 0%,#0a3fa8 55%,#1084d0 100%);position:relative;overflow:hidden;
+  box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff}
+.side svg{position:absolute;left:0;top:0;width:100%;height:100%}
+.wmain{flex:1;padding:12px 14px 0}
+.wmain h2{font-size:13px;font-weight:bold;margin-bottom:8px}
+.wmain p{font-size:12px;line-height:1.4;margin-bottom:8px}
+.lic{height:110px;overflow:auto;background:#fff;padding:5px 6px;font-size:12px;line-height:1.35;
+  box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff,inset 2px 2px 0 #0a0a0a,inset -2px -2px 0 #dfdfdf}
+.lic p{margin-bottom:6px}
+.chk{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;cursor:inherit;user-select:none;padding:2px 0}
+.chk input{appearance:none;-webkit-appearance:none;width:13px;height:13px;background:#fff;margin:0;flex:none;cursor:inherit;
+  box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff,inset 2px 2px 0 #0a0a0a,inset -2px -2px 0 #dfdfdf}
+.chk input:checked{background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='7' height='7' shape-rendering='crispEdges'><path d='M6 0h1v3H6v1H5v1H4v1H3v1H2V6H1V5H0V2h1v1h1v1h1V3h1V2h1V1h1z'/></svg>") 3px 3px no-repeat}
+.chk:focus-within span{outline:1px dotted #000}
+.hr{height:2px;margin:0 8px;box-shadow:inset 0 1px #808080,inset 0 -1px #fff;margin-top:8px}
 
-/* folder icon */
+/* progress */
+#prog .pbody{padding:12px 14px 4px}
+#prog .anim{height:46px;margin-bottom:8px;position:relative}
+#prog .anim svg{position:absolute;top:4px;width:34px;height:34px}
+#prog .fly{position:absolute;top:8px;left:44px;width:16px;height:20px;animation:fly 1.1s linear infinite}
+@keyframes fly{0%{left:44px;top:10px}50%{top:-2px}100%{left:262px;top:10px}}
+#status{font-size:12px;margin-bottom:4px}
+#file{font-size:12px;height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:8px;color:#000}
+.track{height:20px;background:#fff;padding:3px;box-shadow:inset 1px 1px 0 #808080,inset -1px -1px 0 #fff;overflow:hidden}
+.blocks{height:100%;width:0;background:repeating-linear-gradient(90deg,#000080 0 9px,transparent 9px 11px)}
+#pct{font-size:12px;margin-top:6px}
+
 #folder{display:none}
-#folder.on{display:flex;animation:fpop .5s steps(4)}
+#folder.on{display:flex;animation:fpop .45s steps(4)}
 @keyframes fpop{0%{transform:scale(.2)}100%{transform:scale(1)}}
 
-/* ---------- PHASE 3 ---------- */
-#scare{position:absolute;inset:0;z-index:20;display:none;background:#000;font-family:"Fixedsys","Terminal","Courier New",monospace;overflow:hidden;cursor:none}
+/* ---------- SCARE ---------- */
+#scare{position:absolute;inset:0;z-index:40;display:none;background:#000;font-family:"Fixedsys","Terminal","Lucida Console","Courier New",monospace;overflow:hidden;cursor:none;touch-action:none}
 #scare.on{display:block}
 .scr{position:absolute;inset:0;display:none;overflow:hidden}
 .scr.on{display:flex}
 .shake{animation:shake .25s linear}
-@keyframes shake{0%{transform:translate(0,0)}20%{transform:translate(-8px,4px)}40%{transform:translate(7px,-6px)}60%{transform:translate(-5px,-3px)}80%{transform:translate(6px,5px)}100%{transform:translate(0,0)}}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-8px,4px)}40%{transform:translate(7px,-6px)}60%{transform:translate(-5px,-3px)}80%{transform:translate(6px,5px)}}
+#static{position:absolute;inset:0;width:100%;height:100%;z-index:9;display:none;image-rendering:pixelated}
+#static.on{display:block}
+#gl{position:absolute;inset:0;z-index:7;pointer-events:none}
+#gl .slice{position:absolute;inset:0;isolation:isolate;display:none;background:#000;overflow:hidden}
+#gl .slice.on{display:block}
+#gl .ch{position:absolute;inset:0;isolation:isolate}
+#gl .ch>.scr{display:flex}
+#gl .ch::after{content:"";position:absolute;inset:0;background:#f00;mix-blend-mode:multiply}
+#gl .ch.c{mix-blend-mode:screen}
+#gl .ch.c::after{background:#0ff}
 .invert{filter:invert(1) hue-rotate(180deg)}
-#cut{position:absolute;inset:0;background:#000;z-index:8;display:none}
-#cut.on{display:block}
+#sub{position:absolute;inset:0;z-index:10;display:none;background:#fff;color:#000;align-items:center;justify-content:center;font:900 150px/1 Impact,"Arial Black",sans-serif;letter-spacing:.04em;text-shadow:none}
+#sub.on{display:flex}
 
-#sA{flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:40px 54px;color:#b6f0b6;font-size:17px;line-height:1.55;
-  text-shadow:-1px 0 rgba(255,46,46,.4),1px 0 rgba(44,164,255,.4),0 0 7px rgba(80,255,120,.45);white-space:pre-wrap}
+#sA{flex-direction:column;align-items:flex-start;padding:40px 54px;color:#b6f0b6;font-size:17px;line-height:1.55;
+  text-shadow:-1px 0 rgba(255,46,46,.4),1px 0 rgba(44,164,255,.4),0 0 8px rgba(80,255,120,.55);white-space:pre-wrap}
 #sA .w{color:#e6e6e6}
-.cursor{display:inline-block;width:.6em;height:1em;background:#b6f0b6;vertical-align:-2px;animation:blink .6s steps(1) infinite}
+.cursor{display:inline-block;width:.6em;height:1em;background:currentColor;vertical-align:-2px;animation:blink .6s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 
-#sB{flex-direction:column;align-items:center;justify-content:center;gap:26px;background:#000}
-#eye{width:430px;height:auto;filter:drop-shadow(0 0 12px rgba(255,255,255,.3));animation:eflick 1.1s infinite}
-#pupilG{transition:transform .25s}
-@keyframes eflick{0%,100%{opacity:1}7%{opacity:.4}9%{opacity:1}52%{opacity:.85}54%{opacity:.2}56%{opacity:1}}
-.cap{color:#eaeaea;font-weight:bold;font-size:46px;letter-spacing:.14em;text-align:center}
+#sB{flex-direction:column;align-items:center;justify-content:center;gap:22px;background:radial-gradient(ellipse at center,#120606 0%,#000 70%)}
+#eye{width:520px;height:auto;filter:drop-shadow(0 0 14px rgba(255,80,80,.25));animation:eflick 1.7s infinite}
+@keyframes eflick{0%,100%{opacity:1}7%{opacity:.55}9%{opacity:1}52%{opacity:.9}54%{opacity:.35}56%{opacity:1}}
+#lidT,#lidB{transition:transform .09s ease-in}
+#eye.shut #lidT{transform:translateY(78px)}
+#eye.shut #lidB{transform:translateY(-74px)}
+.cap{color:#eaeaea;font-weight:bold;font-size:40px;letter-spacing:.2em;text-align:center}
 
-#sC{flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(ellipse at center,#8f0d0d 0%,#520000 70%,#250000 100%);color:#ffd6d6}
-#lock{font-size:13px;line-height:1.05;color:#ffe3e3;animation:jit .18s steps(2) infinite}
-.big{position:relative;font-weight:900;font-size:96px;color:#fff;letter-spacing:.05em;text-align:center;line-height:1;animation:jit .14s steps(2) infinite}
+#sC{flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(ellipse at center,#9a1010 0%,#560000 65%,#1e0000 100%);color:#ffd6d6}
+#lock{font-size:11.5px;line-height:1.02;color:#ffe3e3;text-shadow:-2px 0 rgba(0,255,255,.45),2px 0 rgba(255,0,80,.55),0 0 6px rgba(255,120,120,.6);animation:jit .18s steps(2) infinite}
+.big{position:relative;font:900 92px/1 Impact,"Arial Black",sans-serif;color:#fff;letter-spacing:.06em;text-align:center;animation:jit .14s steps(2) infinite}
 .big::before,.big::after{content:attr(data-t);position:absolute;inset:0}
-.big::before{color:#0ff;mix-blend-mode:screen;transform:translate(-4px,0);clip-path:inset(0 0 55% 0);animation:g1 .5s steps(3) infinite}
-.big::after{color:#f0f;mix-blend-mode:screen;transform:translate(4px,0);clip-path:inset(50% 0 0 0);animation:g2 .4s steps(3) infinite}
+.big::before{color:#0ff;mix-blend-mode:screen;animation:g1 .5s steps(3) infinite}
+.big::after{color:#f0f;mix-blend-mode:screen;animation:g2 .4s steps(3) infinite}
 @keyframes jit{0%{transform:translate(0,0)}50%{transform:translate(2px,-1px) skewX(2deg)}100%{transform:translate(-2px,1px)}}
 @keyframes g1{0%{clip-path:inset(0 0 70% 0);transform:translate(-6px,0)}50%{clip-path:inset(30% 0 40% 0);transform:translate(5px,0)}100%{clip-path:inset(10% 0 60% 0);transform:translate(-3px,0)}}
 @keyframes g2{0%{clip-path:inset(60% 0 0 0);transform:translate(6px,0)}50%{clip-path:inset(40% 0 20% 0);transform:translate(-5px,0)}100%{clip-path:inset(75% 0 5% 0);transform:translate(3px,0)}}
 
-#sD{background:#0000aa;color:#cfd8ff;align-items:center;justify-content:center}
-#dump{position:absolute;inset:0;padding:8px;font-size:12px;line-height:1.25;white-space:pre;overflow:hidden;opacity:.9}
-.alert{position:relative;z-index:2;background:#b50000;color:#fff;border:3px solid #fff;padding:22px 26px;text-align:center;width:480px;
-  box-shadow:0 0 0 6px #0000aa,0 0 40px rgba(0,0,0,.6);animation:jit .3s steps(2) infinite}
-.alert h3{font-size:28px;letter-spacing:.06em;margin-bottom:10px}
-.alert p{font-size:15px;line-height:1.5}
-.alert .blinky{animation:blink .8s steps(1) infinite}
+#sD{background:#0000aa;color:#fff;align-items:center;justify-content:center;font-size:18px;line-height:24px;text-shadow:0 0 4px rgba(255,255,255,.35)}
+.bsod{width:820px;white-space:pre-wrap}
+.bsod .hd{display:block;width:max-content;margin:0 auto 26px;background:#aaa;color:#0000aa;padding:0 8px;text-shadow:none}
+.bsod .ct{display:block;text-align:center;margin-top:26px}
+#sD.hard{animation:shake .2s linear infinite}
 
-#x{position:absolute;right:0;bottom:0;width:48px;height:48px;z-index:60;opacity:.04;color:#fff;font-size:12px;display:flex;align-items:flex-end;justify-content:flex-end;
-  padding:3px;cursor:default;background:none;border:0;font-family:monospace}
+#x{display:none}
+#screen.scaring #x{position:absolute;right:0;bottom:0;width:56px;height:56px;z-index:60;opacity:.04;color:#fff;font-size:12px;display:flex;align-items:flex-end;justify-content:flex-end;
+  padding:4px;cursor:default;background:none;border:0;font-family:monospace;touch-action:manipulation}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ic-pc" viewBox="0 0 32 32" shape-rendering="crispEdges">
+      <rect x="3" y="2" width="24" height="20" fill="#c0c0c0"/><rect x="3" y="2" width="24" height="1" fill="#fff"/><rect x="3" y="2" width="1" height="20" fill="#fff"/>
+      <rect x="26" y="2" width="1" height="20" fill="#404040"/><rect x="3" y="21" width="24" height="1" fill="#404040"/><rect x="2" y="1" width="26" height="1" fill="#000"/><rect x="2" y="22" width="26" height="1" fill="#000"/><rect x="2" y="1" width="1" height="22" fill="#000"/><rect x="27" y="1" width="1" height="22" fill="#000"/>
+      <rect x="6" y="5" width="18" height="13" fill="#404040"/><rect x="7" y="6" width="16" height="11" fill="#008080"/><rect x="8" y="7" width="6" height="1" fill="#8fe0e0"/><rect x="8" y="8" width="2" height="1" fill="#8fe0e0"/>
+      <rect x="22" y="19" width="2" height="1" fill="#00c000"/>
+      <rect x="11" y="23" width="10" height="2" fill="#808080"/>
+      <rect x="4" y="25" width="24" height="5" fill="#c0c0c0"/><rect x="4" y="25" width="24" height="1" fill="#fff"/><rect x="4" y="29" width="24" height="1" fill="#404040"/><rect x="27" y="25" width="1" height="5" fill="#404040"/><rect x="3" y="24" width="26" height="1" fill="#000"/><rect x="3" y="30" width="26" height="1" fill="#000"/><rect x="3" y="24" width="1" height="7" fill="#000"/><rect x="28" y="24" width="1" height="7" fill="#000"/>
+      <rect x="16" y="27" width="9" height="1" fill="#404040"/><rect x="6" y="27" width="2" height="1" fill="#00e000"/>
+    </symbol>
+    <symbol id="ic-bin" viewBox="0 0 32 32" shape-rendering="crispEdges">
+      <path d="M9.5 9.5h13l-2 19h-9z" fill="#c0c0c0" stroke="#000"/>
+      <path d="M11 10h2v18h-1zM14 11h1v17h-1zM17 11h1v17h-1zM20 11h1v16h-1z" fill="#808080"/><rect x="12" y="11" width="1" height="16" fill="#fff"/>
+      <rect x="6.5" y="6.5" width="19" height="3" fill="#dfdfdf" stroke="#000"/><rect x="7" y="7" width="18" height="1" fill="#fff"/>
+      <rect x="13.5" y="4.5" width="5" height="2" fill="none" stroke="#000"/>
+    </symbol>
+    <symbol id="ic-folder" viewBox="0 0 32 32" shape-rendering="crispEdges">
+      <path d="M2.5 7.5h10l2 2h15v18h-27z" fill="#c8a020" stroke="#000"/>
+      <path d="M2.5 12.5h27v15h-27z" fill="#ffe070" stroke="#000"/><rect x="3" y="13" width="26" height="1" fill="#fff8c0"/><rect x="3" y="26" width="26" height="1" fill="#c8a020"/>
+    </symbol>
+    <symbol id="ic-docs" viewBox="0 0 32 32" shape-rendering="crispEdges">
+      <path d="M2.5 7.5h10l2 2h15v18h-27z" fill="#c8a020" stroke="#000"/>
+      <rect x="7.5" y="4.5" width="15" height="12" fill="#fff" stroke="#808080"/><path d="M10 7h10v1H10zM10 9h8v1h-8zM10 11h10v1H10z" fill="#000080"/>
+      <path d="M2.5 13.5h27v14h-27z" fill="#ffe070" stroke="#000"/><rect x="3" y="14" width="26" height="1" fill="#fff8c0"/>
+    </symbol>
+    <symbol id="ic-ie" viewBox="0 0 32 32">
+      <path d="M7.5 17.5H25A9 9 0 1 0 22.4 23.6" fill="none" stroke="#000" stroke-width="6.5"/>
+      <path d="M7.5 17.5H25A9 9 0 1 0 22.4 23.6" fill="none" stroke="#1a5bd0" stroke-width="4.5"/>
+      <path d="M10 15.5h13" stroke="#7fb4ff" stroke-width="1"/>
+      <ellipse cx="16" cy="16" rx="14.5" ry="5" fill="none" stroke="#000" stroke-width="3" transform="rotate(-32 16 16)" stroke-dasharray="34 6 60"/>
+      <ellipse cx="16" cy="16" rx="14.5" ry="5" fill="none" stroke="#f2b800" stroke-width="1.6" transform="rotate(-32 16 16)" stroke-dasharray="34 6 60"/>
+    </symbol>
+    <symbol id="ic-mini" viewBox="0 0 13 13" shape-rendering="crispEdges">
+      <rect x=".5" y=".5" width="12" height="9" fill="#c0c0c0" stroke="#000"/><rect x="2" y="2" width="9" height="6" fill="#008080"/><rect x="2" y="2" width="3" height="1" fill="#8fe0e0"/><rect x="3" y="10" width="7" height="2" fill="#808080"/><rect x="2" y="12" width="9" height="1" fill="#000"/>
+    </symbol>
+    <symbol id="ic-net" viewBox="0 0 32 32" shape-rendering="crispEdges">
+      <path d="M7 14v3h18v-3M16 17v3" fill="none" stroke="#000"/>
+      <use href="#ic-mini" x="1" y="1" width="13" height="13"/><use href="#ic-mini" x="18" y="1" width="13" height="13"/><use href="#ic-mini" x="9.5" y="18" width="13" height="13"/>
+    </symbol>
+    <symbol id="ic-shield" viewBox="0 0 16 16">
+      <path d="M8 .8l6 2.2v5c0 3.8-2.8 5.8-6 7.2C4.8 13.8 2 11.8 2 8V3z" fill="#1c74d8" stroke="#000060"/>
+      <path d="M8 1.6V14.6C5 13.3 2.8 11.5 2.8 8V3.6z" fill="#5aa8ff"/>
+      <path d="M5 8l2 2 4-4.5" fill="none" stroke="#fff" stroke-width="1.6"/>
+    </symbol>
+    <symbol id="ic-paper" viewBox="0 0 16 20" shape-rendering="crispEdges">
+      <path d="M.5 .5h11l4 4v15H.5z" fill="#fff" stroke="#000"/><path d="M11.5 .5v4h4" fill="#c0c0c0" stroke="#000"/><path d="M3 7h9v1H3zM3 10h10v1H3zM3 13h7v1H3z" fill="#808080"/>
+    </symbol>
+    <symbol id="flag" viewBox="0 0 20 17">
+      <path d="M7 1.6c2-1 4 0 6 0l-1 6.2c-2 0-4-1-6 0z" fill="#ff2a00"/>
+      <path d="M14 1.6c2 0 3.2 1 5 0l-1 6.2c-2 1-3 0-5 0z" fill="#00a63c"/>
+      <path d="M5.6 8.8c2-1 4 0 6 0l-1 6.2c-2 0-4-1-6 0z" fill="#1450e0"/>
+      <path d="M12.6 8.8c2 0 3.2 1 5 0l-1 6.2c-2 1-3 0-5 0z" fill="#ffc800"/>
+      <g shape-rendering="crispEdges"><rect x="3" y="3" width="2" height="2" fill="#ff2a00"/><rect x="1" y="4" width="1" height="1" fill="#ff2a00"/><rect x="2" y="10" width="2" height="2" fill="#1450e0"/><rect x="0" y="11" width="1" height="1" fill="#1450e0"/></g>
+    </symbol>
+    <symbol id="g-min" viewBox="0 0 8 7" shape-rendering="crispEdges"><rect x="1" y="5" width="6" height="2"/></symbol>
+    <symbol id="g-max" viewBox="0 0 9 9" shape-rendering="crispEdges"><path d="M0 0h9v9H0zM1 2v6h7V2z" fill-rule="evenodd"/></symbol>
+    <symbol id="g-x" viewBox="0 0 8 7" shape-rendering="crispEdges"><path d="M0 0h2v1h1v1h2V1h1V0h2v1H7v1H6v1H5v1h1v1h1v1h1v1H6V6H5V5H3v1H2v1H0V6h1V5h1V4h1V3H2V2H1V1H0z"/></symbol>
+  </defs>
+</svg>
 
 <div id="frame">
   <div id="screen">
     <div id="stage">
 
       <div id="desk">
+        <svg id="wall" viewBox="0 0 960 540" preserveAspectRatio="none" aria-hidden="true">
+          <defs><filter id="cl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter></defs>
+          <rect width="960" height="540" fill="#008080"/>
+          <g filter="url(#cl)" fill="#fff" opacity=".09">
+            <ellipse cx="180" cy="110" rx="160" ry="40"/><ellipse cx="300" cy="90" rx="110" ry="46"/>
+            <ellipse cx="720" cy="140" rx="190" ry="44"/><ellipse cx="820" cy="120" rx="100" ry="50"/>
+            <ellipse cx="560" cy="430" rx="220" ry="40"/><ellipse cx="200" cy="400" rx="120" ry="34"/>
+          </g>
+          <g opacity=".13">
+            <use href="#flag" x="440" y="170" width="120" height="102"/>
+            <text x="500" y="318" text-anchor="middle" fill="#fff" font-family="Tahoma,Verdana,sans-serif" font-size="34" font-weight="bold" font-style="italic" letter-spacing="1">Happy Computer</text>
+            <text x="500" y="342" text-anchor="middle" fill="#fff" font-family="Tahoma,Verdana,sans-serif" font-size="13" letter-spacing="6">EDITION 98</text>
+          </g>
+        </svg>
+
         <div id="icons">
-          <div class="icon"><span class="gl" aria-hidden="true">🖥️</span><span class="nm">My Computer</span></div>
-          <div class="icon"><span class="gl" aria-hidden="true">🗑️</span><span class="nm">Recycle Bin</span></div>
-          <div class="icon"><span class="gl" aria-hidden="true">📄</span><span class="nm">My Documents</span></div>
-          <div class="icon"><span class="gl" aria-hidden="true">🌐</span><span class="nm">Internet Explorer</span></div>
-          <div class="icon"><span class="gl" aria-hidden="true">🖧</span><span class="nm">Network Neighborhood</span></div>
-          <button class="icon" id="folder" type="button" aria-label="Folder: i see you"><span class="gl" aria-hidden="true">📁</span><span class="nm">i see you</span></button>
+          <button class="icon" type="button"><svg aria-hidden="true"><use href="#ic-pc"/></svg><span class="nm">My Computer</span></button>
+          <button class="icon" type="button"><svg aria-hidden="true"><use href="#ic-docs"/></svg><span class="nm">My Documents</span></button>
+          <button class="icon" type="button"><svg aria-hidden="true"><use href="#ic-ie"/></svg><span class="nm">Internet Explorer</span></button>
+          <button class="icon" type="button"><svg aria-hidden="true"><use href="#ic-net"/></svg><span class="nm">Network Neighborhood</span></button>
+          <button class="icon" type="button"><svg aria-hidden="true"><use href="#ic-bin"/></svg><span class="nm">Recycle Bin</span></button>
+          <button class="icon" id="folder" type="button" aria-label="Folder: i see you"><svg aria-hidden="true"><use href="#ic-folder"/></svg><span class="nm">i see you</span></button>
         </div>
 
-        <section class="win on" id="setup" style="left:300px;top:120px;width:420px" role="dialog" aria-label="Antivirus 550 Setup">
-          <div class="tbar"><span class="t">Antivirus 550 Setup</span>
-            <span class="tb" aria-hidden="true">_</span>
-            <span class="tb" aria-hidden="true">□</span>
-            <span class="tb" aria-hidden="true">✕</span>
+        <section class="win on" id="setup" style="left:220px;top:64px;width:510px" role="dialog" aria-label="Antivirus 550 Setup">
+          <div class="tbar"><svg aria-hidden="true"><use href="#ic-shield"/></svg><span class="t">Antivirus 550 Setup</span>
+            <span class="tb bev" aria-hidden="true"><svg><use href="#g-min"/></svg></span><span class="tb bev" aria-hidden="true"><svg style="width:9px;height:9px"><use href="#g-max"/></svg></span><span class="tb bev x" aria-hidden="true"><svg><use href="#g-x"/></svg></span>
           </div>
-          <div class="wbody">
-            <div class="shield" aria-hidden="true">🛡️</div>
-            <div>
+          <div class="wiz">
+            <div class="side" aria-hidden="true">
+              <svg viewBox="0 0 150 268">
+                <defs>
+                  <linearGradient id="shg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bfe0ff"/><stop offset=".5" stop-color="#3a8ef0"/><stop offset="1" stop-color="#0b3a9a"/></linearGradient>
+                  <pattern id="pg" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#fff" opacity=".08"/></pattern>
+                </defs>
+                <rect width="150" height="268" fill="url(#pg)"/>
+                <polygon points="0,0 70,0 0,120" fill="#fff" opacity=".06"/><polygon points="150,268 40,268 150,110" fill="#000" opacity=".12"/>
+                <g transform="translate(0,6)">
+                  <path d="M75 36l46 16v42c0 35-22 54-46 64-24-10-46-29-46-64V52z" fill="#000040" opacity=".35" transform="translate(4,5)"/>
+                  <path d="M75 36l46 16v42c0 35-22 54-46 64-24-10-46-29-46-64V52z" fill="url(#shg)" stroke="#fff" stroke-width="3"/>
+                  <path d="M75 46v101c-18-9-36-25-36-53V59z" fill="#fff" opacity=".22"/>
+                  <path d="M56 95l13 13 26-29" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="square"/>
+                </g>
+                <text x="75" y="200" text-anchor="middle" fill="#fff" font-family="Tahoma,sans-serif" font-size="13" font-weight="bold" letter-spacing="3">ANTIVIRUS</text>
+                <text x="75" y="232" text-anchor="middle" fill="#ffe070" font-family="Arial Black,Tahoma,sans-serif" font-size="30" font-weight="900" font-style="italic">550</text>
+              </svg>
+            </div>
+            <div class="wmain">
               <h2>Welcome to the Antivirus 550 Setup Wizard</h2>
-              <p>Your computer may be at risk. Click Download to protect your PC — FREE.</p>
+              <p>Your computer may be at risk. Setup will download and install Antivirus 550 to protect your PC — FREE.</p>
+              <div class="lic" tabindex="0" aria-label="License agreement">
+                <p><b>END USER LICENSE AGREEMENT</b></p>
+                <p>1. Antivirus 550 ("the Program") will watch over your computer at all times.</p>
+                <p>2. The Program cannot be closed, minimized or ignored. The Program does not sleep.</p>
+                <p>3. By installing, you agree that the Program may look back at you.</p>
+                <p>4. There is no section 4.</p>
+              </div>
+              <label class="chk"><input type="checkbox" id="agree" /><span>I accept the license agreement</span></label>
             </div>
           </div>
+          <div class="hr"></div>
           <div class="row">
-            <button class="b98 def" id="dl" type="button">Download</button>
-            <button class="b98" id="cancel" type="button">Cancel</button>
+            <button class="b98 bev" type="button" disabled>&lt; Back</button>
+            <button class="b98 bev def" id="dl" type="button" disabled>Download</button>
+            <button class="b98 bev" id="cancel" type="button">Cancel</button>
           </div>
         </section>
 
-        <section class="win" id="prog" style="left:330px;top:170px;width:360px" role="dialog" aria-label="Installing">
-          <div class="tbar"><span class="t" id="ptitle">Antivirus 550 Setup</span>
-            <span class="tb" aria-hidden="true">_</span>
-            <span class="tb" aria-hidden="true">□</span>
-            <span class="tb" aria-hidden="true">✕</span>
+        <section class="win" id="prog" style="left:290px;top:150px;width:380px" role="dialog" aria-label="Installing">
+          <div class="tbar"><svg aria-hidden="true"><use href="#ic-shield"/></svg><span class="t" id="ptitle">Installing Antivirus 550</span>
+            <span class="tb bev x" aria-hidden="true"><svg><use href="#g-x"/></svg></span>
           </div>
           <div class="pbody">
-            <p id="status">Downloading Antivirus 550...</p>
+            <div class="anim" aria-hidden="true">
+              <svg style="left:4px"><use href="#ic-folder"/></svg>
+              <svg class="fly" viewBox="0 0 16 20"><use href="#ic-paper"/></svg>
+              <svg style="left:300px"><use href="#ic-pc"/></svg>
+            </div>
+            <p id="status">Copying files...</p>
+            <p id="file">&nbsp;</p>
             <div class="track"><div class="blocks" id="fill"></div></div>
             <p id="pct">0% complete</p>
           </div>
-          <div class="row"><button class="b98 def" id="ok" type="button" style="display:none">OK</button></div>
+          <div class="row"><button class="b98 bev def" id="ok" type="button" style="display:none">OK</button></div>
+        </section>
+
+        <section class="win" id="msg" style="left:330px;top:200px;width:300px" role="alertdialog" aria-labelledby="msgT" aria-describedby="msgM">
+          <div class="tbar"><span class="t" id="msgT">My Computer</span>
+            <button class="tb bev x" id="msgX" type="button" aria-label="Close"><svg aria-hidden="true"><use href="#g-x"/></svg></button>
+          </div>
+          <div class="mb">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#fff" stroke="#000"/><circle cx="16" cy="16" r="12" fill="#1a5bd0"/><rect x="14" y="13" width="4" height="11" fill="#fff"/><rect x="14" y="7" width="4" height="4" fill="#fff"/></svg>
+            <p id="msgM">This item is being scanned by Antivirus 550. Please wait.</p>
+          </div>
+          <div class="row"><button class="b98 bev def" id="msgOk" type="button">OK</button></div>
         </section>
 
         <div id="tip" role="status"><b>New folder on your desktop</b>A folder named "i see you" was created.</div>
 
         <div id="bar">
-          <span id="start"><span class="flag" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Start</span>
-          <div id="tasks"><span class="task" id="task">🛡️ Antivirus 550 Setup</span></div>
-          <div id="tray"><span class="ti" aria-hidden="true">🔊</span><span class="ti" aria-hidden="true">🖨️</span><span id="clock">12:00 PM</span></div>
+          <button id="start" class="bev" type="button"><svg aria-hidden="true"><use href="#flag"/></svg>Start</button>
+          <span class="sep"></span>
+          <div id="tasks"><span class="task bev down" id="task"><svg aria-hidden="true"><use href="#ic-shield"/></svg>Antivirus 550 Setup</span></div>
+          <div id="tray">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 5.5h3l4-3.5v12l-4-3.5h-3z" fill="#ffff60" stroke="#000"/><path d="M10.5 5.5c1 1 1 4 0 5M12.5 3.5c2 2 2 7 0 9" fill="none" stroke="#000"/></svg>
+            <span id="clock">12:00 PM</span>
+          </div>
         </div>
       </div>
 
@@ -240,119 +388,150 @@ html.x-mobile #mob{position:fixed;inset:0;display:flex;align-items:center;justif
         <div class="scr" id="sB">
           <svg id="eye" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <radialGradient id="ir" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#666"/><stop offset=".6" stop-color="#bbb"/><stop offset="1" stop-color="#eee"/></radialGradient>
+              <radialGradient id="scl" cx="50%" cy="46%" r="58%"><stop offset="0" stop-color="#f3ede4"/><stop offset=".55" stop-color="#ddd0c4"/><stop offset=".82" stop-color="#b08a7e"/><stop offset="1" stop-color="#4a2420"/></radialGradient>
+              <radialGradient id="iris" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#140904"/><stop offset=".36" stop-color="#4a2c10"/><stop offset=".5" stop-color="#7a6430"/><stop offset=".72" stop-color="#4f6c54"/><stop offset=".9" stop-color="#26362c"/><stop offset="1" stop-color="#060908"/></radialGradient>
+              <linearGradient id="lsh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".75"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+              <linearGradient id="skinT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0404"/><stop offset=".8" stop-color="#3a1c18"/><stop offset="1" stop-color="#55281f"/></linearGradient>
+              <linearGradient id="skinB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a221c"/><stop offset=".3" stop-color="#2a1210"/><stop offset="1" stop-color="#080202"/></linearGradient>
               <clipPath id="al"><path d="M10 110 Q200 -40 390 110 Q200 260 10 110 Z"/></clipPath>
+              <filter id="soft"><feGaussianBlur stdDeviation=".6"/></filter>
             </defs>
-            <path d="M10 110 Q200 -40 390 110 Q200 260 10 110 Z" fill="#111" stroke="#ddd" stroke-width="6"/>
             <g clip-path="url(#al)">
-              <g id="pupilG">
-                <circle cx="200" cy="110" r="68" fill="url(#ir)" stroke="#fff" stroke-width="3"/>
-                <g stroke="#555" stroke-width="1.5" opacity=".7">
-                  <line x1="200" y1="50" x2="200" y2="80"/><line x1="200" y1="140" x2="200" y2="170"/><line x1="140" y1="110" x2="170" y2="110"/><line x1="230" y1="110" x2="260" y2="110"/>
-                  <line x1="158" y1="68" x2="178" y2="88"/><line x1="222" y1="132" x2="242" y2="152"/><line x1="242" y1="68" x2="222" y2="88"/><line x1="178" y1="132" x2="158" y2="152"/>
-                </g>
-                <circle id="pupil" cx="200" cy="110" r="30" fill="#000"/>
-                <circle cx="218" cy="92" r="9" fill="#fff" opacity=".9"/>
+              <rect width="400" height="220" fill="url(#scl)"/>
+              <g fill="none" stroke="#a3121a" stroke-linecap="round" opacity=".6" filter="url(#soft)">
+                <path stroke-width="1.6" d="M14 110 C50 100 70 118 110 108 C125 104 135 112 142 106"/>
+                <path stroke-width="1.3" d="M30 90 C60 86 80 96 105 92 C118 90 128 96 140 92"/>
+                <path stroke-width="1.4" d="M28 132 C60 130 85 140 112 128 C122 124 132 130 140 124"/>
+                <path stroke-width="1" d="M60 76 C80 86 100 80 122 90"/>
+                <path stroke-width="1.6" d="M386 110 C350 104 330 118 290 108 C275 104 265 112 258 106"/>
+                <path stroke-width="1.3" d="M370 88 C340 86 320 96 295 92 C282 90 272 96 260 92"/>
+                <path stroke-width="1.4" d="M372 132 C340 132 315 140 288 128 C278 124 268 130 260 124"/>
+                <path stroke-width="1" d="M340 74 C320 86 300 80 278 90"/>
+                <path stroke-width=".7" d="M70 104 C76 96 84 96 90 88M80 134 C88 140 96 138 104 148M48 120 C56 126 60 124 66 132M330 104 C324 96 316 96 310 88M320 134 C312 140 304 138 296 148M352 120 C344 126 340 124 334 132"/>
               </g>
+              <g id="irisG">
+                <circle cx="200" cy="110" r="66" fill="url(#iris)"/>
+                <g id="fibers" opacity=".55"></g>
+                <circle cx="200" cy="110" r="64" fill="none" stroke="#050505" stroke-width="5" opacity=".85"/>
+                <circle cx="200" cy="110" r="34" fill="none" stroke="#a07a30" stroke-width="2" opacity=".35"/>
+                <circle id="pupil" cx="200" cy="110" r="26" fill="#000"/>
+                <ellipse cx="224" cy="86" rx="11" ry="8" fill="#fff" opacity=".85"/>
+                <circle cx="182" cy="130" r="4" fill="#fff" opacity=".35"/>
+              </g>
+              <rect x="0" y="20" width="400" height="80" fill="url(#lsh)"/>
+              <g id="lidT"><path d="M-10 -200H410V110Q200 -40 -10 110Z" fill="url(#skinT)"/><path d="M-10 110Q200 -40 410 110" fill="none" stroke="#000" stroke-width="5"/></g>
+              <g id="lidB"><path d="M-10 110Q200 260 410 110V420H-10Z" fill="url(#skinB)"/><path d="M-10 110Q200 260 410 110" fill="none" stroke="#1a0606" stroke-width="3"/></g>
             </g>
-            <path d="M30 96 Q200 -30 370 96" fill="none" stroke="#888" stroke-width="2" opacity=".6"/>
+            <path d="M10 110 Q200 -40 390 110 Q200 260 10 110 Z" fill="none" stroke="#3a1a16" stroke-width="4"/>
+            <path d="M36 74 Q200 -36 364 74" fill="none" stroke="#3a1a16" stroke-width="3" opacity=".7"/>
+            <path d="M60 162 Q200 232 340 162" fill="none" stroke="#3a1a16" stroke-width="2" opacity=".45"/>
           </svg>
           <div class="cap">YOU HAVE BEEN NOTICED</div>
         </div>
         <div class="scr" id="sC">
 <pre id="lock">
-          .:::::::::::::.
-        .::'           '::.
-       ::'               '::
-       ::                 ::
-       ::                 ::
-       ::                 ::
-   .:::::::::::::::::::::::::::.
-   :::::::::::::::::::::::::::::
-   ::::::::::::'   ':::::::::::::
-   :::::::::::       ::::::::::::
-   ::::::::::::.   .:::::::::::::
-   :::::::::::::   ::::::::::::::
-   :::::::::::::   ::::::::::::::
-   :::::::::::::::::::::::::::::
-   ':::::::::::::::::::::::::::'
+            .-===============-.
+         .-'                   '-.
+       .'     .-===========-.     '.
+      /     .'               '.     \
+     |     /                   \     |
+     |    |                     |    |
+     |    |                     |    |
+     |    |                     |    |
+     |    |                     |    |
+  ___|____|_____________________|____|___
+ |#######################################|
+ |#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#|
+ |#%:::::::::::::::::::::::::::::::::::%#|
+ |#%:::::::::::   .-"""-.   :::::::::::%#|
+ |#%:::::::::::  /  ___  \  :::::::::::%#|
+ |#%::::::::::: |  (   )  | :::::::::::%#|
+ |#%:::::::::::  \  '-'  /  :::::::::::%#|
+ |#%:::::::::::   '.   .'   :::::::::::%#|
+ |#%:::::::::::    |   |    :::::::::::%#|
+ |#%:::::::::::    |   |    :::::::::::%#|
+ |#%:::::::::::    |___|    :::::::::::%#|
+ |#%:::::::::::::::::::::::::::::::::::%#|
+ |#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#|
+ |#######################################|
+ '======================================='
 </pre>
           <div class="big" data-t="I SEE YOU">I SEE YOU</div>
         </div>
         <div class="scr" id="sD">
-          <div id="dump"></div>
-          <div class="alert">
-            <h3>SYSTEM COMPROMISED</h3>
-            <p>UXCryptor service is running<br>Memory section 0x0424* is locked<br><span class="blinky">do not turn off your computer</span></p>
-          </div>
+          <div class="bsod"><span class="hd">Windows</span>A fatal exception 0E has occurred at 0028:C0011E36 in VXD UXCRYPT(01) +
+00010E36. The current application will be terminated.
+
+*  Press any key to terminate the current application.
+*  Press CTRL+ALT+DEL again to restart your computer. You will
+   lose any unsaved information in all applications.
+<span class="ct">Press any key to continue <span class="cursor" style="height:4px;vertical-align:-1px"></span></span></div>
         </div>
-        <div id="cut"></div>
+        <div id="gl"></div>
+        <canvas id="static" width="240" height="135"></canvas>
+        <div id="sub">I SEE YOU</div>
       </div>
 
     </div>
     <button id="x" type="button" aria-label="exit">exit</button>
 
-    <canvas id="grain" class="crt" width="160" height="90"></canvas>
+    <canvas id="grain" class="crt" width="192" height="108"></canvas>
+    <div id="grille" class="crt"></div>
     <div id="roll" class="crt"></div>
     <div id="scan" class="crt"></div>
+    <div id="glow" class="crt"></div>
     <div id="bulge" class="crt"></div>
     <div id="mask" class="crt"></div>
     <div id="jitterbar"></div>
   </div>
 </div>
-<div id="mob">
-  <div class="x-tv">
-    <section class="win" role="alertdialog" aria-labelledby="mobT" aria-describedby="mobM">
-      <div class="tbar"><span class="t" id="mobT">Error</span><button class="tb" type="button" aria-label="Close" tabindex="-1">×</button></div>
-      <div class="wbody">
-        <span class="x-err" aria-hidden="true">×</span>
-        <p id="mobM">This program can only run on a PC. Please open this page on a computer.</p>
-      </div>
-      <div class="row"><button class="b98 def" id="mobOk" type="button">OK</button></div>
-    </section>
-    <div class="x-scan"></div>
-    <div class="x-vig"></div>
-  </div>
-</div>
+
+<p id="hint">Turn your phone sideways for a bigger screen</p>
 
 <script>
 (function(){
-  if(!document.documentElement.classList.contains("x-mobile")) return;
-  var w=document.querySelector("#mob .win");
-  function wig(){ w.classList.remove("wiggle"); void w.offsetWidth; w.classList.add("wiggle"); }
-  document.getElementById("mobOk").addEventListener("click", wig);
-  document.querySelector("#mob .tb").addEventListener("click", wig);
-})();
-</script>
-<script>
-(function(){
-  if(document.documentElement.classList.contains("x-mobile")) return;
-  var $ = function(id){ return document.getElementById(id); };
+  var $=function(id){ return document.getElementById(id); };
 
-  /* ---------- SCREEN FIT (16:9 landscape, letterboxed) ---------- */
-  var screenEl=$("screen"), stage=$("stage");
-  function fit(){
-    var vw=window.innerWidth, vh=window.innerHeight, w=Math.min(vw, vh*16/9), h=w*9/16;
-    screenEl.style.width=w+"px"; screenEl.style.height=h+"px";
-    stage.style.transform="scale("+(w/960)+")";
+  /* ---------- SCREEN FIT (16:9, letterboxed on every device) ---------- */
+  var screenEl=$("screen"), stage=$("stage"), compact=null;
+  window.xScale=1; window.xW=960; window.xH=540;
+  var spots={setup:[510,345],prog:[380,210],msg:[300,140]};
+  function place(){
+    for(var id in spots){
+      var w=$(id), s=spots[id];
+      w.style.left=Math.round(id==="setup"&&compact ? window.xW-s[0]-16 : (window.xW-s[0])/2+(id==="setup"?-5:0))+"px";
+      w.style.top=Math.max(4,Math.round((window.xH-30-s[1])/2))+"px";
+    }
   }
-  fit();
-  window.addEventListener("resize", fit);
-  window.addEventListener("orientationchange", fit);
+  function fit(){
+    var vw=window.innerWidth, vh=window.innerHeight, small=vw<720||vh<420;
+    var pad=small?8:Math.max(20,vw*.015);
+    var w=Math.min(vw-pad*2, (vh-pad*2)*16/9), h=w*9/16;
+    screenEl.style.width=w+"px"; screenEl.style.height=h+"px";
+    var c=w<720;
+    if(c!==compact){
+      compact=c; window.xW=c?768:960; window.xH=c?432:540;
+      stage.style.width=window.xW+"px"; stage.style.height=window.xH+"px";
+      stage.classList.toggle("x-compact", c);
+      place();
+    }
+    window.xScale=w/window.xW;
+    stage.style.transform="scale("+window.xScale+")";
+  }
+  fit(); window.addEventListener("resize", fit); window.addEventListener("orientationchange", function(){ setTimeout(fit, 250); });
 
-  /* ---------- CRT GRAIN + JITTER BAR ---------- */
+  /* ---------- CRT GRAIN + JITTER ---------- */
   var g=$("grain"), gc=g.getContext("2d"), gi=gc.createImageData(g.width,g.height);
   function grain(){
     var d=gi.data;
-    for(var i=0;i<d.length;i+=4){ var v=Math.random()*255|0; d[i]=v; d[i+1]=v; d[i+2]=v; d[i+3]=42; }
+    for(var i=0;i<d.length;i+=4){ var v=Math.random()*255|0; d[i]=v; d[i+1]=v; d[i+2]=v; d[i+3]=40; }
     gc.putImageData(gi,0,0);
   }
-  setInterval(grain, 85); grain();
+  setInterval(grain, 80); grain();
   var jb=$("jitterbar");
   (function jitter(){
     setTimeout(function(){
-      jb.style.top=(Math.random()*90)+"%"; jb.style.opacity=".9";
-      jb.style.height=(2+Math.random()*5)+"px";
+      jb.style.top=(Math.random()*90)+"%"; jb.style.opacity=".9"; jb.style.height=(2+Math.random()*5)+"px";
       stage.style.marginLeft=(Math.random()<.5?"-2px":"2px");
       setTimeout(function(){ jb.style.opacity="0"; stage.style.marginLeft="0"; }, 90+Math.random()*120);
       jitter();
@@ -361,205 +540,373 @@ html.x-mobile #mob{position:fixed;inset:0;display:flex;align-items:center;justif
 
   /* ---------- CLOCK ---------- */
   function tick(){
-    var d=new Date(), hh=d.getHours(), m=d.getMinutes();
-    var ap=hh<12?"AM":"PM", h12=hh%12; if(h12===0) h12=12;
-    $("clock").textContent=h12+":"+(m<10?"0":"")+m+" "+ap;
+    var d=new Date(), hh=d.getHours(), m=d.getMinutes(), h12=hh%12||12;
+    $("clock").textContent=h12+":"+(m<10?"0":"")+m+" "+(hh<12?"AM":"PM");
   }
   tick(); setInterval(tick, 15000);
+
+  /* ---------- ICON SELECTION ---------- */
+  var icons=[].slice.call(document.querySelectorAll(".icon"));
+  function select(el){ icons.forEach(function(i){ i.classList.toggle("sel", i===el); }); }
+  /* open: double-click with a mouse, single tap with touch or pen, Enter on keyboard */
+  var lastType="";
+  window.xOnOpen=function(el, fn){
+    el.addEventListener("pointerdown", function(e){ lastType=e.pointerType||"mouse"; });
+    el.addEventListener("keydown", function(){ lastType=""; });
+    el.addEventListener("click", function(e){ if(lastType!=="mouse"){ e.preventDefault(); fn(e); } lastType=""; });
+    el.addEventListener("dblclick", function(e){ e.preventDefault(); fn(e); });
+  };
+  icons.forEach(function(i){ i.addEventListener("pointerdown", function(){ select(i); }); i.addEventListener("focus", function(){ select(i); }); });
+  $("desk").addEventListener("pointerdown", function(e){
+    if(e.target.id==="wall"||e.target.id==="desk") select(null);
+    if(!e.target.closest("#start")) $("start").classList.remove("down");
+  });
+  $("start").addEventListener("click", function(){ this.classList.toggle("down"); });
+  var msg=$("msg"), notes={"My Computer":"My Computer is being scanned by Antivirus 550. Please wait.",
+    "My Documents":"My Documents is locked while Antivirus 550 is scanning.",
+    "Internet Explorer":"Internet Explorer cannot open while Antivirus 550 is watching.",
+    "Network Neighborhood":"No other computers were found. Only this one.",
+    "Recycle Bin":"The Recycle Bin is empty. Nothing can be thrown away."};
+  icons.forEach(function(i){
+    if(i.id==="folder") return;
+    window.xOnOpen(i, function(){
+      var n=i.querySelector(".nm").textContent;
+      $("msgT").textContent=n; $("msgM").textContent=notes[n]||notes["My Computer"];
+      msg.classList.add("on"); window.xFront(msg); $("msgOk").focus();
+    });
+  });
+  function closeMsg(){ msg.classList.remove("on"); }
+  $("msgOk").addEventListener("click", closeMsg); $("msgX").addEventListener("click", closeMsg);
+
+  /* ---------- WINDOWS: FOCUS + DRAG ---------- */
+  var z=10, wins=[].slice.call(document.querySelectorAll("#desk .win"));
+  function front(w){ w.style.zIndex=++z; wins.forEach(function(o){ o.classList.toggle("blur", o!==w); }); }
+  window.xFront=front;
+  wins.forEach(function(w){
+    w.addEventListener("pointerdown", function(){ front(w); });
+    var bar=w.querySelector(".tbar"), drag=null;
+    bar.addEventListener("pointerdown", function(e){
+      if((e.pointerType==="mouse"&&e.button!==0)||e.target.closest(".tb")) return;
+      drag={x:e.clientX,y:e.clientY,l:parseFloat(w.style.left)||0,t:parseFloat(w.style.top)||0};
+      try{ bar.setPointerCapture(e.pointerId); }catch(_){}
+      e.preventDefault();
+    });
+    bar.addEventListener("pointermove", function(e){
+      if(!drag) return;
+      var s=window.xScale||1;
+      var l=drag.l+(e.clientX-drag.x)/s, t=drag.t+(e.clientY-drag.y)/s;
+      l=Math.max(-w.offsetWidth+60, Math.min(window.xW-60, l)); t=Math.max(0, Math.min(window.xH-30-20, t));
+      w.style.left=l+"px"; w.style.top=t+"px";
+    });
+    function end(){ drag=null; }
+    bar.addEventListener("pointerup", end); bar.addEventListener("pointercancel", end);
+  });
 })();
 </script>
 <script>
 (function(){
-  if(document.documentElement.classList.contains("x-mobile")) return;
-  var $ = function(id){ return document.getElementById(id); };
-  var setup=$("setup"), prog=$("prog"), fill=$("fill"), statusEl=$("status"), pct=$("pct"), ok=$("ok"),
-      folder=$("folder"), tip=$("tip"), task=$("task"), scare=$("scare"), cut=$("cut");
-  var timers=[], audio=null, running=false, installing=false, tipTimer=null;
+  var $=function(id){ return document.getElementById(id); };
+  var desk=$("desk"), setup=$("setup"), prog=$("prog"), fill=$("fill"), statusEl=$("status"), fileEl=$("file"), pct=$("pct"), ok=$("ok"),
+      agree=$("agree"), dl=$("dl"), folder=$("folder"), tip=$("tip"), task=$("task"), scare=$("scare"), gl=$("gl"), stat=$("static"), sub=$("sub");
+  var timers=[], audio=null, running=false, installing=false, tipTimer=null, cur=null, hard=0;
 
   function later(fn, ms){ var t=setTimeout(function(){ if(running) fn(); }, ms); timers.push(t); return t; }
   function clearTimers(){ timers.forEach(clearTimeout); timers=[]; }
+  function wiggle(el){ el.classList.remove("wiggle"); void el.offsetWidth; el.classList.add("wiggle"); }
 
-  /* ---------- PHASE 1 / 2: SETUP WIZARD ---------- */
-  $("cancel").addEventListener("click", function(){
-    setup.classList.remove("wiggle"); void setup.offsetWidth; setup.classList.add("wiggle");
-  });
-  $("dl").addEventListener("click", function(){
-    if(installing) return;
+  /* ---------- SETUP WIZARD ---------- */
+  agree.addEventListener("change", function(){ dl.disabled=!agree.checked; });
+  $("cancel").addEventListener("click", function(){ wiggle(setup); });
+  var files=["C:\\WINDOWS\\SYSTEM\\uxcrypt.dll","C:\\WINDOWS\\SYSTEM\\uxwatch.vxd","C:\\WINDOWS\\SYSTEM\\eyeball.ocx","C:\\WINDOWS\\SYSTEM32\\iseeu.sys",
+    "C:\\WINDOWS\\SYSTEM\\vmm32\\uxhook.vxd","C:\\WINDOWS\\INF\\av550.inf","C:\\PROGRA~1\\AV550\\av550.exe","C:\\PROGRA~1\\AV550\\scan.dat",
+    "C:\\WINDOWS\\SYSTEM\\mswatch.drv","C:\\WINDOWS\\SYSTEM\\notice.dll","C:\\WINDOWS\\FONTS\\stare.fon","C:\\WINDOWS\\SYSTEM\\kernel_eye.dll",
+    "C:\\WINDOWS\\SYSTEM\\uxcrypt.cfg","C:\\WINDOWS\\SYSTEM\\nosleep.vxd","C:\\WINDOWS\\SYSTEM\\behind_you.dll","C:\\WINDOWS\\WIN.INI"];
+  dl.addEventListener("click", function(){
+    if(installing||dl.disabled) return;
     installing=true;
-    setup.classList.remove("on");
-    prog.classList.add("on");
+    setup.classList.remove("on"); prog.classList.add("on"); window.xFront(prog);
+    desk.classList.add("busy");
     ok.style.display="none";
-    var msgs=["Downloading Antivirus 550...","Verifying...","Installing...","Almost done..."];
-    var start=performance.now(), dur=3000;
+    var msgs=["Downloading Antivirus 550...","Copying files...","Copying files...","Registering components...","Almost done..."];
+    var start=performance.now(), dur=6500, lastFile=-1;
+    var trackW=fill.parentNode.clientWidth-6, n=Math.floor(trackW/11);
     (function step(now){
+      if(!installing) return;
       var p=Math.min(1,(now-start)/dur);
-      var blocks=Math.floor(p*28)/28;
-      fill.style.width=(blocks*100)+"%";
-      statusEl.textContent=msgs[Math.min(3,Math.floor(p*4))];
-      pct.textContent=Math.round(blocks*100)+"% complete";
+      var eased=p<.7?p*1.15:.805+(p-.7)*.65;
+      var k=Math.floor(Math.min(1,eased)*n);
+      fill.style.width=(k*11)+"px";
+      statusEl.textContent=msgs[Math.min(4,Math.floor(p*5))];
+      var fi=Math.floor(now/170)%files.length;
+      if(fi!==lastFile){ lastFile=fi; fileEl.textContent="Copying "+files[fi]+"..."; }
+      pct.textContent=Math.round(k/n*100)+"% complete";
       if(p<1) requestAnimationFrame(step);
-      else { statusEl.textContent="Setup complete."; pct.textContent="Antivirus 550 has been installed."; ok.style.display="inline-block"; ok.focus(); }
+      else {
+        fill.style.width=(n*11)+"px"; desk.classList.remove("busy");
+        statusEl.textContent="Setup complete."; fileEl.textContent="Antivirus 550 has been installed."; pct.textContent="100% complete";
+        ok.style.display="inline-block"; ok.focus();
+      }
     })(start);
   });
   ok.addEventListener("click", function(){
-    prog.classList.remove("on");
-    task.style.display="none";
-    folder.classList.add("on");
-    tip.classList.add("on");
-    clearTimeout(tipTimer);
-    tipTimer=setTimeout(function(){ tip.classList.remove("on"); }, 6000);
+    prog.classList.remove("on"); task.style.display="none";
+    folder.classList.add("on"); tip.classList.add("on");
+    clearTimeout(tipTimer); tipTimer=setTimeout(function(){ tip.classList.remove("on"); }, 7000);
   });
   tip.addEventListener("click", function(){ tip.classList.remove("on"); });
+  window.xOnOpen(folder, startScare);
 
-  var touched=false;
-  folder.addEventListener("touchend", function(e){ touched=true; startScare(e); });
-  folder.addEventListener("dblclick", startScare);
-  folder.addEventListener("keydown", function(e){ if(e.key==="Enter") startScare(e); });
-
-  /* ---------- AUDIO ---------- */
-  function startAudio(){
+  /* ---------- AUDIO (unlocked on the first tap, click or key, so it works on phones) ---------- */
+  var actx=null, noiseBuf=null;
+  function unlockAudio(){
     try{
       var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
-      var ctx=new AC(), master=ctx.createGain();
-      master.gain.setValueAtTime(0,ctx.currentTime);
-      master.gain.linearRampToValueAtTime(0.06,ctx.currentTime+1.5);
+      if(!actx){
+        actx=new AC();
+        var len=actx.sampleRate*.6; noiseBuf=actx.createBuffer(1,len,actx.sampleRate);
+        var d=noiseBuf.getChannelData(0); for(var i=0;i<len;i++) d[i]=Math.random()*2-1;
+        var s=actx.createBufferSource(), g=actx.createGain(); g.gain.value=0; s.buffer=noiseBuf; s.connect(g); g.connect(actx.destination); s.start(); s.stop(actx.currentTime+.01);
+      }
+      if(actx.state==="suspended") actx.resume();
+    }catch(e){}
+  }
+  ["pointerdown","touchend","keydown","click"].forEach(function(t){ document.addEventListener(t, unlockAudio, true); });
+  function startAudio(){
+    unlockAudio();
+    try{
+      if(!actx) return;
+      var ctx=actx, master=ctx.createGain();
+      master.gain.setValueAtTime(0,ctx.currentTime); master.gain.linearRampToValueAtTime(0.06,ctx.currentTime+1.5);
       master.connect(ctx.destination);
-      var o1=ctx.createOscillator(); o1.type="sine"; o1.frequency.value=90;
+      var o1=ctx.createOscillator(); o1.type="sine"; o1.frequency.value=60;
       var o2=ctx.createOscillator(); o2.type="triangle"; o2.frequency.value=90.7;
-      var g2=ctx.createGain(); g2.gain.value=.4;
+      var g2=ctx.createGain(); g2.gain.value=.35;
       var lfo=ctx.createOscillator(); lfo.frequency.value=.25;
       var lg=ctx.createGain(); lg.gain.value=3; lfo.connect(lg); lg.connect(o1.frequency);
       o1.connect(master); o2.connect(g2); g2.connect(master);
       o1.start(); o2.start(); lfo.start();
-      audio={ctx:ctx,master:master,nodes:[o1,o2,lfo]};
+      audio={ctx:ctx,master:master,nodes:[o1,o2,lfo],noise:noiseBuf};
     }catch(e){ audio=null; }
+  }
+  function staticBurst(dur, vol){
+    if(!audio) return;
+    try{
+      var c=audio.ctx, s=c.createBufferSource(), f=c.createBiquadFilter(), g=c.createGain(), t=c.currentTime;
+      s.buffer=audio.noise; f.type="bandpass"; f.frequency.value=1200+Math.random()*2400; f.Q.value=.6;
+      g.gain.setValueAtTime(vol||.6,t); g.gain.exponentialRampToValueAtTime(.001,t+dur);
+      s.connect(f); f.connect(g); g.connect(audio.master); s.start(t, Math.random()*.2); s.stop(t+dur+.02);
+    }catch(e){}
   }
   function blip(){
     if(!audio) return;
     try{
       var c=audio.ctx, o=c.createOscillator(), g=c.createGain(), t=c.currentTime;
       o.type=Math.random()<.5?"square":"sawtooth";
-      o.frequency.setValueAtTime(300+Math.random()*1400,t);
-      o.frequency.exponentialRampToValueAtTime(80+Math.random()*200,t+.08);
-      g.gain.setValueAtTime(.025,t); g.gain.exponentialRampToValueAtTime(.0001,t+.09);
+      o.frequency.setValueAtTime(300+Math.random()*1400,t); o.frequency.exponentialRampToValueAtTime(80+Math.random()*200,t+.08);
+      g.gain.setValueAtTime(.3,t); g.gain.exponentialRampToValueAtTime(.001,t+.09);
       o.connect(g); g.connect(audio.master); o.start(t); o.stop(t+.1);
     }catch(e){}
   }
   function stopAudio(){
     if(!audio) return;
-    try{ audio.nodes.forEach(function(n){ n.stop(); }); audio.ctx.close(); }catch(e){}
+    try{ audio.nodes.forEach(function(n){ n.stop(); }); audio.master.disconnect(); }catch(e){}
     audio=null;
   }
 
-  /* ---------- PHASE 3 ---------- */
-  var screens={A:$("sA"),B:$("sB"),C:$("sC"),D:$("sD")};
-  function show(k){ for(var s in screens) screens[s].classList.toggle("on", s===k); }
-  function shake(){ scare.classList.remove("shake"); void scare.offsetWidth; scare.classList.add("shake"); }
-  function blackCut(ms){ cut.classList.add("on"); later(function(){ cut.classList.remove("on"); }, ms); }
-  function invertFlash(){ scare.classList.add("invert"); later(function(){ scare.classList.remove("invert"); }, 70); }
+  /* ---------- STATIC TRANSITIONS ---------- */
+  var sc=stat.getContext("2d"), simg=sc.createImageData(stat.width,stat.height);
+  function drawStatic(){
+    var d=simg.data, W=stat.width, H=stat.height;
+    for(var y=0;y<H;y++){
+      var band=Math.random()<.06?1.6:1, shift=Math.random()<.04;
+      for(var x=0;x<W;x++){
+        var i=(y*W+x)*4, v=Math.min(255,(Math.random()*255*band)|0);
+        d[i]=shift?v:v*.95; d[i+1]=v; d[i+2]=shift?v*.8:v; d[i+3]=255;
+      }
+    }
+    sc.putImageData(simg,0,0);
+  }
+  function staticCut(ms, then){
+    stat.classList.add("on"); staticBurst(ms/1000+.05,.7);
+    var end=performance.now()+ms;
+    (function f(){ if(!running) return; drawStatic(); if(performance.now()<end) requestAnimationFrame(f); else { stat.classList.remove("on"); if(then) then(); } })();
+  }
 
+  /* ---------- GLITCH SLICES (RGB split) ---------- */
+  var slices=[];
+  function buildSlices(scr){
+    gl.innerHTML=""; slices=[];
+    for(var i=0;i<5;i++){
+      var s=document.createElement("div"); s.className="slice";
+      ["r","c"].forEach(function(k){
+        var ch=document.createElement("div"); ch.className="ch "+k;
+        var cl=scr.cloneNode(true);
+        [].forEach.call(cl.querySelectorAll("defs"), function(n){ n.parentNode.removeChild(n); });
+        ch.appendChild(cl); s.appendChild(ch);
+      });
+      gl.appendChild(s); slices.push(s);
+    }
+  }
+  var base={A:0,B:.22,C:.55,D:.3};
+  function glitchTick(){
+    var lvl=Math.max(base[cur]||0, hard);
+    slices.forEach(function(s){
+      if(Math.random()<lvl*.7){
+        var top=Math.random()*92, h=1+Math.random()*(6+lvl*14), dx=(Math.random()<.5?-1:1)*(4+Math.random()*30*lvl), sp=2+lvl*7;
+        s.style.clipPath="inset("+top+"% 0 "+Math.max(0,100-top-h)+"% 0)";
+        s.style.transform="translateX("+dx+"px)";
+        s.firstChild.style.transform="translateX("+(-sp)+"px)"; s.lastChild.style.transform="translateX("+sp+"px)";
+        s.classList.add("on");
+      } else s.classList.remove("on");
+    });
+    later(glitchTick, 60+Math.random()*110);
+  }
+  function subliminal(){
+    later(function(){
+      sub.classList.add("on");
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ sub.classList.remove("on"); }); });
+      subliminal();
+    }, 2200+Math.random()*4500);
+  }
+
+  /* ---------- SCREENS ---------- */
+  var screens={A:$("sA"),B:$("sB"),C:$("sC"),D:$("sD")};
+  function show(k){
+    cur=k;
+    for(var s in screens) screens[s].classList.toggle("on", s===k);
+    if(k && k!=="A") buildSlices(screens[k]); else { gl.innerHTML=""; slices=[]; }
+  }
+  function shake(){ scare.classList.remove("shake"); void scare.offsetWidth; scare.classList.add("shake"); }
+  function invertFlash(){ scare.classList.add("invert"); later(function(){ scare.classList.remove("invert"); }, 60); }
   function chaos(){
     var r=Math.random();
-    if(r<.35) shake();
-    else if(r<.5) blackCut(60+Math.random()*90);
-    else if(r<.62 && screens.C.classList.contains("on")) invertFlash();
-    if(Math.random()<.5) blip();
-    later(chaos, 250+Math.random()*900);
+    if(r<.3) shake();
+    else if(r<.4) staticCut(50+Math.random()*60);
+    else if(r<.52 && cur==="C") invertFlash();
+    if(Math.random()<.45) blip();
+    later(chaos, 300+Math.random()*900);
   }
 
   var lines=["Starting Windows 98 . . . .","error: 0x03527737","error: 0x0266712","error: 0x02897593","error: 0x01447812","error: 0x0150974",
     "error: 0x03873700","error: 0x0700882","error: 0x03803618","Memory section at address 0x0424* is locked!","Service UXCryptor started."];
   function typeOut(done){
-    var el=screens.A; el.innerHTML="";
-    var li=0;
+    var el=screens.A; el.innerHTML=""; var li=0;
     function nextLine(){
       if(li>=lines.length){ later(done, 900); return; }
-      var row=document.createElement("div");
-      if(li===0||li>=9) row.className="w";
-      var txt=document.createTextNode(""), cur=document.createElement("span");
-      cur.className="cursor"; row.appendChild(txt); row.appendChild(cur); el.appendChild(row);
+      var row=document.createElement("div"); if(li===0||li>=9) row.className="w";
+      var txt=document.createTextNode(""), c=document.createElement("span"); c.className="cursor";
+      row.appendChild(txt); row.appendChild(c); el.appendChild(row);
       var s=lines[li], ci=0;
       (function ch(){
         txt.data=s.slice(0,++ci);
         if(ci<s.length) later(ch, li===0?55:22+Math.random()*25);
-        else { row.removeChild(cur); li++; if(Math.random()<.4) blip(); later(nextLine, li===1?700:160); }
+        else { row.removeChild(c); li++; if(Math.random()<.4) blip(); later(nextLine, li===1?700:160); }
       })();
     }
     nextLine();
   }
 
-  function buildDump(){
-    var hex=function(n){ var s=""; for(var i=0;i<n;i++) s+="0123456789ABCDEF"[Math.random()*16|0]; return s; };
-    var words=["STOP: 0x000000"+hex(2),"*** UXCryptor.sys - Address "+hex(8)+" base at "+hex(8),"KERNEL_DATA_INPAGE_ERROR","PAGE_FAULT_IN_NONPAGED_AREA",
-      "Dumping physical memory to disk: ","IRQL_NOT_LESS_OR_EQUAL","i see you i see you i see you","MEMORY_SECTION_LOCKED 0x0424"+hex(4),"SERVICE UXCryptor :: watching"];
-    var out=[];
-    for(var i=0;i<60;i++){
-      var r=Math.random();
-      if(r<.55){ var l=hex(8)+": "; for(var j=0;j<8;j++) l+=hex(4)+" "; out.push(l+" "+hex(16)); }
-      else out.push(words[Math.random()*words.length|0]+(Math.random()<.3?" "+(Math.random()*100|0)+"%":""));
+  /* ---------- EYE ---------- */
+  (function fibers(){
+    var g=$("fibers"), ns="http://www.w3.org/2000/svg", pal=["#d6b060","#8fb07a","#3a2410","#e8d090","#2b4a38","#b07a30"];
+    for(var i=0;i<140;i++){
+      var a=Math.random()*Math.PI*2, r1=27+Math.random()*6, r2=44+Math.random()*19, l=document.createElementNS(ns,"line");
+      var wob=(Math.random()-.5)*.08;
+      l.setAttribute("x1",200+Math.cos(a)*r1); l.setAttribute("y1",110+Math.sin(a)*r1);
+      l.setAttribute("x2",200+Math.cos(a+wob)*r2); l.setAttribute("y2",110+Math.sin(a+wob)*r2);
+      l.setAttribute("stroke",pal[Math.random()*pal.length|0]); l.setAttribute("stroke-width",(.5+Math.random()).toFixed(2));
+      l.setAttribute("stroke-linecap","round"); g.appendChild(l);
     }
-    $("dump").textContent=out.join("\n");
+  })();
+  var eye=$("eye"), irisG=$("irisG"), pupil=$("pupil"), mx=-1, my=-1, ex=0, ey=0, lastMove=0, sx=0, sy=0;
+  function track(e){ mx=e.clientX; my=e.clientY; lastMove=performance.now(); }
+  document.addEventListener("pointermove", track, {passive:true});
+  document.addEventListener("pointerdown", track, {passive:true});
+  document.addEventListener("touchmove", function(e){ var t=e.touches[0]; if(t) track(t); }, {passive:true});
+  document.addEventListener("touchstart", function(e){ var t=e.touches[0]; if(t) track(t); }, {passive:true});
+  function eyeLoop(){
+    if(!running) return;
+    if(cur==="B"){
+      var r=eye.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2, tx, ty, now=performance.now();
+      if(mx<0||now-lastMove>2500){ if(Math.random()<.02){ sx=(Math.random()-.5)*2; sy=(Math.random()-.5)*2; } tx=sx*50; ty=sy*18; }
+      else { tx=Math.max(-1,Math.min(1,(mx-cx)/(r.width*.6)))*58; ty=Math.max(-1,Math.min(1,(my-cy)/(r.height*.8)))*22; }
+      ex+=(tx-ex)*.18; ey+=(ty-ey)*.18;
+      irisG.setAttribute("transform","translate("+ex.toFixed(1)+","+ey.toFixed(1)+")");
+      pupil.setAttribute("r",(25+Math.sin(now/420)*3+(hard?8:0)).toFixed(1));
+    }
+    requestAnimationFrame(eyeLoop);
   }
-
-  function moveEye(){
-    $("pupilG").setAttribute("transform","translate("+((Math.random()-.5)*60).toFixed(0)+","+((Math.random()-.5)*20).toFixed(0)+")");
-    $("pupil").setAttribute("r", 24+Math.random()*14);
+  function blinkLoop(){
+    later(function(){
+      if(cur==="B"){ eye.classList.add("shut"); later(function(){ eye.classList.remove("shut"); }, 150); }
+      blinkLoop();
+    }, 900+Math.random()*2600);
   }
 
   function loop(){
-    show("B"); moveEye(); shake(); blip();
-    later(moveEye, 700); later(moveEye, 1400);
+    show("B"); shake(); blip();
     later(function(){
-      blackCut(90);
-      later(function(){
+      staticCut(180, function(){
         show("C"); shake(); invertFlash(); blip();
         later(function(){
-          blackCut(80);
-          later(function(){
-            buildDump(); show("D"); shake(); blip();
-            later(function(){ blackCut(140); later(loop, 140); }, 2600);
-          }, 80);
-        }, 2400);
-      }, 90);
-    }, 2100);
+          staticCut(160, function(){
+            show("D"); shake();
+            later(function(){ staticCut(220, loop); }, 4800);
+          });
+        }, 2800);
+      });
+    }, 3200);
   }
 
   function startScare(e){
     if(running) return;
     if(e) e.preventDefault();
-    running=true;
+    running=true; hard=0;
     tip.classList.remove("on");
     startAudio();
-    scare.classList.add("on");
+    scare.classList.add("on"); $("screen").classList.add("scaring"); document.body.classList.add("scaring");
+    $("msg").classList.remove("on");
     show("A");
+    requestAnimationFrame(eyeLoop);
     later(function(){
       typeOut(function(){
-        blackCut(250);
-        later(function(){ chaos(); loop(); }, 250);
+        staticCut(300, function(){ chaos(); glitchTick(); subliminal(); blinkLoop(); loop(); });
       });
     }, 500);
   }
 
+  function goHard(){
+    hard=1; screens.D.classList.add("hard"); shake(); invertFlash(); blip();
+    staticCut(70); 
+    clearTimeout(goHard.t);
+    goHard.t=setTimeout(function(){ hard=0; screens.D.classList.remove("hard"); }, 1300);
+  }
+
   function stopScare(){
     if(!running) return;
-    running=false;
-    clearTimers();
-    stopAudio();
-    scare.classList.remove("on","invert","shake");
-    cut.classList.remove("on");
-    show(null);
-    screens.A.innerHTML="";
-    folder.classList.remove("on");
-    tip.classList.remove("on");
+    running=false; hard=0;
+    clearTimers(); stopAudio();
+    scare.classList.remove("on","invert","shake"); $("screen").classList.remove("scaring"); document.body.classList.remove("scaring");
+    stat.classList.remove("on"); sub.classList.remove("on"); screens.D.classList.remove("hard"); eye.classList.remove("shut");
+    show(null); screens.A.innerHTML="";
+    folder.classList.remove("on","sel"); tip.classList.remove("on");
     task.style.display="";
-    setup.classList.add("on");
-    prog.classList.remove("on");
-    fill.style.width="0";
+    setup.classList.add("on"); prog.classList.remove("on"); window.xFront(setup);
+    fill.style.width="0"; agree.checked=false; dl.disabled=true;
+    desk.classList.remove("busy");
     installing=false;
   }
 
-  document.addEventListener("keydown", function(e){ if(e.key==="Escape"||e.key==="Esc") stopScare(); });
-  $("x").addEventListener("click", function(e){ e.stopPropagation(); stopScare(); });
+  document.addEventListener("keydown", function(e){
+    if(e.key==="Escape"||e.key==="Esc"){ stopScare(); return; }
+    if(running && cur==="D" && !e.ctrlKey && !e.metaKey && !e.altKey){ e.preventDefault(); goHard(); }
+  });
+  /* a tap or click on the blue screen counts as "press any key" */
+  scare.addEventListener("pointerdown", function(e){ if(running && cur==="D"){ e.preventDefault(); goHard(); } });
+  var xBtn=$("x");
+  xBtn.addEventListener("pointerdown", function(e){ e.stopPropagation(); });
+  xBtn.addEventListener("pointerup", function(e){ e.stopPropagation(); stopScare(); });
+  xBtn.addEventListener("click", function(e){ e.stopPropagation(); stopScare(); });
 })();
 </script>
 </body>
